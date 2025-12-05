@@ -18,7 +18,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.idea" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -51,7 +51,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/AdminLocal1/PycharmProjects/pychatbot-OKOU-VAN-RYSSELBERGHE-int2/.idea/hogwart/data",
     "node.js.detected.package.eslint": "true",
@@ -97,7 +97,7 @@
       <workItem from="1764622668580" duration="4000" />
       <workItem from="1764752761517" duration="138000" />
       <workItem from="1764766856617" duration="22000" />
-      <workItem from="1764918683636" duration="6722000" />
+      <workItem from="1764918683636" duration="7063000" />
     </task>
     <task id="LOCAL-00001" summary="Voici mon premier commit">
       <option name="closed" value="true" />
@@ -147,7 +147,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764925956514</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="test modification">
+      <option name="closed" value="true" />
+      <created>1764926623808</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1764926623808</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
