@@ -28,6 +28,12 @@ def ask_choice(question, choices_list):
 
     return answer
 
+
+def load_file(address):
+    with open(address,"r") as f:
+        file = json.load(f)
+        return file
+
 def item_choice():
     with open("hogwart/data/inventory.json","r") as f:
         inventory = json.load(f)
