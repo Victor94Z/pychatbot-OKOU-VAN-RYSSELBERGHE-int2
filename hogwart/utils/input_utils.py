@@ -1,11 +1,13 @@
 import json
 
 def ask_text(question):
-    answer = input(question)
+
+    answer = input(question).strip()
     while len(answer) == 0 or answer.isspace():
         answer = input(question).strip()
 
     return answer
+
 
 
 def ask_choice(question, choices_list):

@@ -1,11 +1,22 @@
 import json
 import random
+import os
 
+from hogwart.utils.input_utils import ask_choice
 
-with open("hogwart/data/houses.json","r",encoding="utf-8") as h:
-        house = json.load(h)
+# folder of THIS file (hogwart/universe)
+CURRENT_DIR = os.path.dirname(__file__)
 
-with open("hogwart/data./inventory.json","r") as f:
+# go up one folder: hogwart/
+BASE_DIR = os.path.dirname(CURRENT_DIR)
+
+# build full path: hogwart/data/houses.json
+DATA_PATH = os.path.join(BASE_DIR, "data", "inventory.json")
+
+with open(DATA_PATH, "r", encoding="utf-8") as f:
+        house = json.load(f)
+
+with open(DATA_PATH,"r") as f:
         inventory = json.load(f)
 
 
@@ -68,4 +79,20 @@ def modify_money(character,amount):
 
     character["money"] += amount
     return character["money"]
+
+
+
+
+
+def add_item (character, key, item):
+    print(f"You found: : {item} ")
+
+    answer =ask_choice("Do you want to add the item to your inventory ?",["Yes","No"])
+
+    if answer.lower() == "yes":
+        character[key].extend([item])
+        return f"You added {item} to your inventory !"
+    elif answer.lower() == "no":
+        return f"No items have been added to your inventory"
+
 
