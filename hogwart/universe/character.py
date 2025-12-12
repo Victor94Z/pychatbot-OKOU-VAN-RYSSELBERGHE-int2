@@ -1,13 +1,6 @@
 import json
 import random
 
-houses = {
- "Gryffindor": 0,
- "Slytherin": 0,
- "Hufflepuff": 0,
- "Ravenclaw": 0
-}
-
 
 with open("hogwart/data/houses.json","r",encoding="utf-8") as h:
         house = json.load(h)
@@ -52,7 +45,11 @@ def init_character(first_name,last_name):
         "money" : 100,
         "spells" : [],
         "inventory" : [],
-        "house_attributes" : house_name
+        "house_attributes" : house_name,
+        "courage" : random.randint(0,10), 
+        "intelligence" : random.randint(0,10),
+        "loyalty" : random.randint(0,10),
+        "ambition" : random.randint(0,10)
     }
 
 
@@ -72,19 +69,3 @@ def modify_money(character,amount):
     character["money"] += amount
     return character["money"]
 
-
-def update_house_points(house_name,points):
-    houses[house_name] = points
-    return houses
-
-print(update_house_points("Gryffindor",0))
-
-def winning_house():
-    max_points = max(houses.values())
-    best = [team for team,points in houses.items() if points == max_points]
-    if len(best) == 1:
-        print("La meilleure equipe est ",best[0]," avec ",max_points," points.")
-    else :
-         print(f"Egalité entre les equipes : {", ".join(best)} avec {max_points} points")
-
-winning_house()
