@@ -30,10 +30,10 @@ def ask_choice(question, choices_list):
     return answer
 
 
-def load_file(address):
-    with open(address,"r") as f:
-        file = json.load(f)
-        return file
+def load_file(file_path):
+    with open(file_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+        return data
 
 def validate_number(answer, min_val=None, max_val=None):
     is_valid_number = True

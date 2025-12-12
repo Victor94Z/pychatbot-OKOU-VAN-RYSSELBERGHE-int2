@@ -2,7 +2,7 @@ import json
 import random
 import os
 
-from hogwart.utils.input_utils import ask_choice
+from hogwart.utils.input_utils import ask_choice, load_file
 
 # folder of THIS file (hogwart/universe)
 CURRENT_DIR = os.path.dirname(__file__)
@@ -11,14 +11,11 @@ CURRENT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(CURRENT_DIR)
 
 # build full path: hogwart/data/houses.json
-DATA_PATH = os.path.join(BASE_DIR, "data", "inventory.json")
+INVENTORY_DATA_PATH = os.path.join(BASE_DIR, "data", "inventory.json")
+HOUSES_DATA_PATH = os.path.join(BASE_DIR, "data", "houses.json")
 
-with open(DATA_PATH, "r", encoding="utf-8") as f:
-        house = json.load(f)
-
-with open(DATA_PATH,"r") as f:
-        inventory = json.load(f)
-
+house = load_file(HOUSES_DATA_PATH)
+inventory = load_file(INVENTORY_DATA_PATH)
 
 
 def item_choice():
