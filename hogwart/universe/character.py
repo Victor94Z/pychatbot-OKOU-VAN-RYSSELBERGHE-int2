@@ -37,15 +37,12 @@ def item_choice():
 
 def init_character(first_name,last_name):
 
-    house_name,house_attributes = random.choice(list(house.items())) 
-
     return {
         "last_name" : last_name,
         "first_name" : first_name,
         "money" : 100,
         "spells" : [],
         "inventory" : [],
-        "house_attributes" : house_name,
         "courage" : random.randint(0,10), 
         "intelligence" : random.randint(0,10),
         "loyalty" : random.randint(0,10),
@@ -59,9 +56,13 @@ def display_player(player):
           "First name : ",player["first_name"],"\n",
           "Laste name : ",player["last_name"],"\n",
           "Money : ",player["money"],"\n",
-          "Spells : ",",".join(player["spells"]),"\n",
-          "Inventory : ", ",".join(player["inventory"]),"\n",
-          "House : ",player["house_attributes"]
+          "Spells : ",", ".join(player["spells"]),"\n",
+          "Inventory : ", ", ".join(player["inventory"]),"\n",
+          "Attributes : ","\n",
+          "     courage : ",player["courage"],"\n",
+          "     intelligence : ",player["intelligence"],"\n",
+          "     loyalty : ",player["loyalty"],"\n",
+          "     ambition : ",player["loyalty"],"\n",
           )
     
 def modify_money(character,amount):
