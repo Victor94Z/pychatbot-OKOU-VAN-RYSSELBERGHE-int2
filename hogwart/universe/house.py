@@ -20,15 +20,32 @@ questions = [
 ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"])
 ]
 
-character = init_character("a","b")
-display_player(character)
+player = init_character("a","b")
+display_player(player)
 
 
+def assign_house(character):
+    for i in range(len(questions)):
+        question, answers, answer_houses = questions[i]
 
+        print(question)
+        for j in range(len(answers)):
+            print(j + 1, ": ", answers[j])
 
+        ans = int(input("Quelle est votre réponse : "))
 
+        chosen_house = answer_houses[ans - 1]
+        houses[chosen_house] += 1
 
+    houses["Gryffindor"] += character["courage"] * 2
+    houses["Slytherin"] += character["ambition"] * 2
+    houses["Hufflepuff"] += character["loyalty"] * 2
+    houses["Ravenclaw"] += character["intelligence"] * 2
 
+    winner = max(houses, key=houses.get)
+    print("Votre maison est :", winner)
+
+assign_house(player)
 
 
 
