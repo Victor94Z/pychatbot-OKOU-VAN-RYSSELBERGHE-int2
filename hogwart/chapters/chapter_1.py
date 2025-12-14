@@ -29,8 +29,8 @@ def introduction():
     print()
 
 
-def  create_character():
-    max_points = 20
+def  create_character(max_points=24):
+    remaining_points = max_points
     attributes={}
 
     last_name=ask_text("Enter your character's last name : ")
@@ -38,37 +38,32 @@ def  create_character():
 
     print()
     print("Choose your attributes : ")
-    print(f"You have {max_points} points to allocate among 4 skills ( Courage, Intelligence, Loyalty and Ambition ), choose wisely :")
+    print(f"You have {remaining_points} points to allocate among 4 skills ( Courage, Intelligence, Loyalty and Ambition ), choose wisely :")
 
 
     different_attribute = ["Courage", "Intelligence", "Loyalty", "Ambition"]
 
     end="False"
     while end == "False":
-        max_points = 20
-        points_used = 0
-        remaining_points = max_points - points_used
+        remaining_points = max_points
+
         for attribute in different_attribute:
             print()
             print("Remaining points : ", remaining_points)
 
-            if remaining_points == 0 and attribute in ["Loyalty", "Ambition"]:
+            if remaining_points == 0 :
                 attributes[attribute] = 0
                 print(f"{attribute} level (1-10) : 0")
                 continue
 
             answer=ask_number(f"{attribute} level (1-10) : ",1,10)
 
-            if answer > remaining_points:
+            while answer > remaining_points:
                 print("You do not have enough points remaining.")
                 answer=ask_number(f"{attribute} level (1-10) : ",1,10)
 
-
-
             attributes[attribute]=answer
-            points_used += answer
-
-            remaining_points = max_points - points_used
+            remaining_points -= answer
 
         if remaining_points > 0:
             print()
@@ -138,8 +133,10 @@ def receive_letter():
     time.sleep(1.2)
     print("We are pleased to inform you that you have been accepted to Hogwarts School of Witchcraft and Wizardry!” ")
     print()
+    print(('{:^130}'.format("---------------------------------------------------------------------------")))
+    print()
     time.sleep(1.2)
-    accept_invitation=ask_choice("Do you accept this invitation and go to Hogwarts?", ["Yes, of course! ", "No, I'd rather stay with Uncle Vernon..."])
+    accept_invitation=ask_choice("Do you accept this invitation and go to Hogwarts?", ["Yes, of course!", "No, I'd rather stay with Uncle Vernon..."])
     if accept_invitation.lower() == "yes, of course!" or accept_invitation.lower() == "1":
         print()
         print("Congratulations,you have been accepted to Hogwarts!")
@@ -179,5 +176,8 @@ def meet_hagrid(character):
     time.sleep(2.5)
     print("* Together, you leave the house and head toward Diagon Alley, ready for magical adventures… *")
 
+
+introduction()
 character_choose=create_character()
+receive_letter()
 meet_hagrid(character_choose)
