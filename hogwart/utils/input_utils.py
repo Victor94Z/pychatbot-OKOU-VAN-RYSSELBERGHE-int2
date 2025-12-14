@@ -12,6 +12,7 @@ def ask_text(question):
 
 def ask_choice(question, choices_list):
     print(question)
+    print()
     size_list = len(choices_list)
     values_and_index = []
     for i in range(size_list):
@@ -20,12 +21,16 @@ def ask_choice(question, choices_list):
         values_and_index.append((choices_list[i].lower()))
         values_and_index.append(str(i + 1).lower())
 
+    print()
     print("Your choice:", end=" ")
     answer = input()
+    answer = answer.strip()
 
     while answer.lower() not in values_and_index:
+        print()
         print("Your choice have to be in the list :", end=" ")
         answer = (input())
+
 
     return answer.strip()
 
