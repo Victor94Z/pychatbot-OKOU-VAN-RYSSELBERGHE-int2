@@ -43,18 +43,15 @@ def item_choice():
     return item_chosed
 
 
-def init_character(first_name,last_name):
+def init_character(last_name, first_name, attributes) :
 
     return {
-        "last_name" : last_name,
-        "first_name" : first_name,
-        "money" : 100,
-        "spells" : [],
-        "inventory" : [],
-        "courage" : random.randint(0,10), 
-        "intelligence" : random.randint(0,10),
-        "loyalty" : random.randint(0,10),
-        "ambition" : random.randint(0,10)
+        "Last Name" : last_name,
+        "First Name" : first_name,
+        "Money" : 100,
+        "Spells" : [],
+        "Inventory" : [],
+        "Attributes": attributes,
     }
 
 

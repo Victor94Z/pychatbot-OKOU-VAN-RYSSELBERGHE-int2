@@ -27,7 +27,7 @@ def ask_choice(question, choices_list):
         print("Your choice have to be in the list :", end=" ")
         answer = (input())
 
-    return answer
+    return answer.strip()
 
 
 def load_file(file_path):
