@@ -1,4 +1,6 @@
 import time
+
+
 from hogwart.utils.input_utils import ask_number,ask_choice,ask_text
 from hogwart.universe.character import init_character,display_player
 
@@ -103,6 +105,7 @@ def  create_character():
     print()
     print(input("Press Enter to continue..."))
 
+    return character
 
 
 
@@ -149,5 +152,32 @@ def receive_letter():
         time.sleep(1.2)
         print(('{:^130}'.format("GAME OVER")))
         exit()
+    print()
+    print(input("Press Enter to continue..."))
 
+def meet_hagrid(character):
+    print("\n Suddenly, a loud crash echoes from the door. A giant figure stands there, but you have no idea who he is or what he wants.")
+    print()
+    time.sleep(2.5)
+    print(f"You: ( * With a trembling voice * ) 'Uh… who are you?'")
+    print()
+    time.sleep(2.5)
+    print(f"Stranger: 'Hello {character["First Name"]}! I'm Hagrid. Dumbledore, the headmaster of Hogwarts, sent me to guide you to the school.'")
+    print()
+    time.sleep(2.5)
+    choice=ask_choice("Do you want to follow Hagrid ?", ["Yes", "No"])
 
+    if choice.lower() == "yes" or choice.lower() == "1":
+        print("Hagrid: 'Perfect! But before we head to Hogwarts, we need to do some shopping in Diagon Alley.'")
+    else:
+        print("* You hesitate, but Hagrid gently insists and takes you along anyway! *")
+        print()
+        time.sleep(2)
+        print("Hagrid: 'No worries, but first we have to go shopping in Diagon Alley!'")
+
+    print()
+    time.sleep(2.5)
+    print("* Together, you leave the house and head toward Diagon Alley, ready for magical adventures… *")
+
+character_choose=create_character()
+meet_hagrid(character_choose)
