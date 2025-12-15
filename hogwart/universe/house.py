@@ -1,4 +1,5 @@
 from character import *
+from hogwart.utils.input_utils import ask_choice
 
 houses = {
  "Gryffindor": 0,
@@ -20,28 +21,51 @@ questions = [
 ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"])
 ]
 
-character = init_character("a","b")
-display_player(character)
 
 
+def  update_house_points(houses, house_name, points):
+
+    if house_name in houses:
+        if points < 0 :
+            print()
+            print(f"{house_name} loses {abs(points)} points ")
+        else:
+            print()
+            print(f"{house_name} wins {abs(points)} points ")
+        houses[house_name] += points
+        print()
+        print("The points are now : ",houses)
+    else:
+        print()
+        print("Warning, this house does not exist !")
+        print()
+        need_remainder = ask_choice("Did you want a reminder of the existing houses ?",["Yes","No"])
+        if need_remainder.lower() == "yes" or need_remainder.lower() == "1":
+            print()
+            print("At Hogwarts, there are 4 main houses : Hufflepuff, Ravenclaw, Slytherin and Gryffindor")
+        else:
+            print()
+            print("Enter a valid house : ")
 
 
+def display_winning_house(houses):
+    max_points = None
+    for score in houses.values():
+        if max_points is None or score > max_points:
+            max_points = score
 
+    winning_house = []
+    for key, value in houses.items():
+        if value == max_points:
+            winning_house.append(key)
 
+    if len(winning_house) == 1:
+        print()
+        print(f"The house with the most points is {winning_house[0]} with {max_points} points.")
 
-
-
-
-# def update_house_points(house_name,points):
-
-#     houses[house_name] = points
-#     return houses
-
-# def winning_house():
-    
-#     max_points = max(houses.values())
-#     best = [team for team,points in houses.items() if points == max_points]
-#     if len(best) == 1:
-#         print("La meilleure equipe est ",best[0]," avec ",max_points," points.")
-#     else :
-#          print(f"Egalité entre les equipes : {", ".join(best)} avec {max_points} points.")
+    elif len(winning_house) == 4:
+        print()
+        print(f"All houses are tied with {max_points} points.")
+    else:
+        print()
+        print(f"Houses {", ".join(winning_house)} are tied with {max_points} points each.")
