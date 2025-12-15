@@ -9,16 +9,23 @@ houses = {
 }
 
 questions = [
-("You see a friend in danger. What do you do?",
-["Rush to help", "Think of a plan", "Seek help", "Stay calm and observe"],
-["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]),
+    (
+        "You see a friend in danger. What do you do?",
+        ["Rush to help", "Think of a plan", "Seek help", "Stay calm and observe"],
+        ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]
+    ),
 
-("Which trait describes you best?",
-["Brave and loyal", "Cunning and ambitious", "Patient and hardworking", "Intelligent and curious"],["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]),
+    (
+        "Which trait describes you best?",
+        ["Brave and loyal", "Cunning and ambitious", "Patient and hardworking", "Intelligent and curious"],
+        ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]
+    ),
 
-("When faced with a difficult challenge, you...",
-["Charge in without hesitation", "Look for the best strategy", "Rely on your friends", "Analyze the problem"],
-["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"])
+    (
+        "When faced with a difficult challenge, you...",
+        ["Charge in without hesitation", "Look for the best strategy", "Rely on your friends", "Analyze the problem"],
+        ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]
+    )
 ]
 
 
@@ -69,3 +76,40 @@ def display_winning_house(houses):
     else:
         print()
         print(f"Houses {", ".join(winning_house)} are tied with {max_points} points each.")
+
+def assign_house(character,questions):
+    score_houses={"Gryffindor":0,"Slytherin":0,"Hufflepuff":0,"Ravenclaw":0}
+    character_attributes = character["Attributes"]
+
+    # Initialise houses points
+    for key,value in character_attributes.items():
+        if key == 'Courage' :
+            score_houses["Gryffindor"] += value*2
+        elif key == 'Ambition' :
+            score_houses["Slytherin"] += value*2
+        elif key == 'Loyalty' :
+            score_houses["Hufflepuff"] += value*2
+        elif key == 'Intelligence' :
+            score_houses["Ravenclaw"] += value*2
+
+    #Attribute points with questions
+    print()
+    for i in range(3):
+        print()
+        question_answer=ask_choice(questions[i][0],questions[i][1])
+        for value in range(len(questions[i][1])+1):
+            str_answer=questions[i][1][value-1]
+            str_value=str(value)
+            if question_answer.lower() == str_answer.lower() or question_answer == str_value :
+                house = questions[i][2][value-1]
+                score_houses[house] += 3
+                break
+
+    print()
+    print("Summary of scores :")
+    for key, value in score_houses.items():
+        print(f"{key} : {value} points")
+
+
+
+
