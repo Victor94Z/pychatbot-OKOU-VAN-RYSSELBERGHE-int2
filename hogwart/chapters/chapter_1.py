@@ -87,16 +87,7 @@ def  create_character(max_points=24):
 
 
     print()
-    print("Character profile:")
-    print()
-    print(f"Last name: {character['Last Name']}")
-    print(f"First name: {character['First Name']}")
-    print(f"Money: {character['Money']}")
-    print("Inventory:")
-    print("Spells:")
-    print("Attributes:")
-    for attr, value in character["Attributes"].items():
-        print(f"- {attr}: {value}")
+    display_player(character)
     print()
     print(input("Press Enter to continue..."))
 
@@ -107,7 +98,6 @@ def  create_character(max_points=24):
 
 def receive_letter():
     print()
-
     print(('{:^130}'.format("Night falls quietly around you.")))
     time.sleep(1.3)
     print('{:^130}'.format("The world seems calm… almost too calm."))
@@ -177,7 +167,11 @@ def meet_hagrid(character):
     print("* Together, you leave the house and head toward Diagon Alley, ready for magical adventures… *")
 
 
+''''def buy_supplies(character):'''
+
+
 introduction()
 character_choose=create_character()
+
 receive_letter()
 meet_hagrid(character_choose)
