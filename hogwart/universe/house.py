@@ -77,4 +77,34 @@ def display_winning_house(houses):
         print()
         print(f"Houses {", ".join(winning_house)} are tied with {max_points} points each.")
 
-def assign_house(character, questions):
+def assign_house(character,questions):
+    score_houses={"Gryffindor":0,"Slytherin":0,"Hufflepuff":0,"Ravenclaw":0}
+    character_attributes = character["Attributes"]
+
+    # Initialise houses points
+    for key,value in character_attributes.items():
+        if key == 'Courage' :
+            score_houses["Gryffindor"] += value*2
+        elif key == 'Ambition' :
+            score_houses["Slytherin"] += value*2
+        elif key == 'Loyalty' :
+            score_houses["Hufflepuff"] += value*2
+        elif key == 'Intelligence' :
+            score_houses["Ravenclaw"] += value*2
+
+    #Attribute points with questions
+    print()
+    first_answer=ask_choice(questions[0][0],questions[0][1])
+    print(first_answer)
+
+    second_answer=ask_choice(questions[1][0],questions[1][1])
+    print(second_answer)
+    third_answer=ask_choice(questions[2][0],questions[2][1])
+    print(third_answer)
+
+
+
+
+character=init_character("harry","potter",{"Courage":5,"Ambition":9,"Loyalty":2,"Intelligence":4})
+print(assign_house(character,questions))
+
