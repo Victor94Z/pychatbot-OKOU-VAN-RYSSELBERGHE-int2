@@ -1,8 +1,16 @@
 import time
+import os
+
+from hogwart.utils.input_utils import ask_text, ask_number, ask_choice, load_file
+from hogwart.universe.character import init_character, display_player, modify_money,BASE_DIR
 
 
-from hogwart.utils.input_utils import ask_number,ask_choice,ask_text
-from hogwart.universe.character import init_character,display_player
+
+INVENTORY_DATA_PATH = os.path.join(BASE_DIR, "data", "inventory.json")
+HOUSES_DATA_PATH = os.path.join(BASE_DIR, "data", "houses.json")
+
+house = load_file(HOUSES_DATA_PATH)
+inventory = load_file(INVENTORY_DATA_PATH)
 
 #introduces the player at the beginning of the story
 def introduction():
@@ -85,14 +93,12 @@ def  create_character(max_points=24):
 
     character= init_character(last_name,first_name,attributes)
 
-
     print()
     display_player(character)
     print()
     print(input("Press Enter to continue..."))
 
     return character
-
 
 
 
@@ -140,7 +146,6 @@ def receive_letter():
         print(('{:^130}'.format("GAME OVER")))
         exit()
     print()
-    print(input("Press Enter to continue..."))
 
 def meet_hagrid(character):
     print("\n Suddenly, a loud crash echoes from the door. A giant figure stands there, but you have no idea who he is or what he wants.")
@@ -167,11 +172,32 @@ def meet_hagrid(character):
     print("* Together, you leave the house and head toward Diagon Alley, ready for magical adventures… *")
 
 
-''''def buy_supplies(character):'''
+def buy_supplies(character):
+    print()
+    print("Welcome to Diagon Alley !")
+    print()
+    for key,value in inventory.items():
+        if key == "1" or key == "2" or key == "4" :
+            print(f"{key}. {value[0]} -  {value[1]} Galleons (required)" )
+        else:
+            print(f"{key}. {value[0]} -  {value[1]} Galleons")
+
+    required = ["Magic Wand","Wizard Robe","Potions Book"]
+
+    print("\n",f"You have {character["Money"]} Galleons. ")
+    print()
+    print(f"Remaining required items:",end=" ")
+    for objet in required:
+            print(object,end=" ")
+    item_to_buy=ask_choice("Enter the number of the item to buy:",inventory.items())
+    if item_to_buy.lower() == "magic wand":
 
 
-introduction()
-character_choose=create_character()
 
-receive_letter()
-meet_hagrid(character_choose)
+
+character_choose=init_character("OKOU","Victor",{"Courage":5})
+
+buy_supplies(character_choose)
+
+
+

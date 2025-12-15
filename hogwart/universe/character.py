@@ -19,7 +19,7 @@ inventory = load_file(INVENTORY_DATA_PATH)
 
 def init_character(last_name, first_name, attributes) :
 
-    character = {
+    character_init = {
         "Last Name" : last_name,
         "First Name" : first_name,
         "Money" : 100,
@@ -28,7 +28,7 @@ def init_character(last_name, first_name, attributes) :
         "Attributes": attributes,
     }
 
-    return character
+    return character_init
 
 
 def display_player(character):
