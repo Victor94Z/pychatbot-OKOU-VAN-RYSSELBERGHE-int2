@@ -1,4 +1,5 @@
 from character import *
+from hogwart.utils.input_utils import ask_choice
 
 houses = {
  "Gryffindor": 0,
@@ -20,22 +21,32 @@ questions = [
 ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"])
 ]
 
-character = init_character("a","b")
-display_player(character)
+
+def  update_house_points(houses, house_name, points):
+
+    if house_name in houses:
+        if points < 0 :
+            print()
+            print(f"{house_name} loses {abs(points)} points ")
+        else:
+            print()
+            print(f"{house_name} wins {abs(points)} points ")
+        houses[house_name] += points
+        print()
+        print("The points are now : ",houses)
+    else:
+        print()
+        print("Warning, this house does not exist !")
+        print()
+        need_remainder = ask_choice("Did you want a reminder of the existing houses ?",["Yes","No"])
+        if need_remainder.lower() == "yes" or need_remainder.lower() == "1":
+            print()
+            print("At Hogwarts, there are 4 main houses : Hufflepuff, Ravenclaw, Slytherin and Gryffindor")
+        else:
+            print()
+            print("Enter a valid house :")
 
 
-
-
-
-
-
-
-
-
-# def update_house_points(house_name,points):
-
-#     houses[house_name] = points
-#     return houses
 
 # def winning_house():
     

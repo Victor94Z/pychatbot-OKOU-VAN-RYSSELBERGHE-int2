@@ -29,7 +29,7 @@ def ask_choice(question, choices_list):
     while answer.lower() not in values_and_index:
         print()
         print("Your choice have to be in the list :", end=" ")
-        answer = (input())
+        answer = input()
 
 
     return answer.strip()
