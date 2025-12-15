@@ -22,6 +22,7 @@ questions = [
 ]
 
 
+
 def  update_house_points(houses, house_name, points):
 
     if house_name in houses:
@@ -44,15 +45,27 @@ def  update_house_points(houses, house_name, points):
             print("At Hogwarts, there are 4 main houses : Hufflepuff, Ravenclaw, Slytherin and Gryffindor")
         else:
             print()
-            print("Enter a valid house :")
+            print("Enter a valid house : ")
 
 
+def display_winning_house(houses):
+    max_points = None
+    for score in houses.values():
+        if max_points is None or score > max_points:
+            max_points = score
 
-# def winning_house():
-    
-#     max_points = max(houses.values())
-#     best = [team for team,points in houses.items() if points == max_points]
-#     if len(best) == 1:
-#         print("La meilleure equipe est ",best[0]," avec ",max_points," points.")
-#     else :
-#          print(f"Egalité entre les equipes : {", ".join(best)} avec {max_points} points.")
+    winning_house = []
+    for key, value in houses.items():
+        if value == max_points:
+            winning_house.append(key)
+
+    if len(winning_house) == 1:
+        print()
+        print(f"The house with the most points is {winning_house[0]} with {max_points} points.")
+
+    elif len(winning_house) == 4:
+        print()
+        print(f"All houses are tied with {max_points} points.")
+    else:
+        print()
+        print(f"Houses {", ".join(winning_house)} are tied with {max_points} points each.")
