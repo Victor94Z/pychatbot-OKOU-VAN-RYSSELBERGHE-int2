@@ -94,17 +94,22 @@ def assign_house(character,questions):
 
     #Attribute points with questions
     print()
-    first_answer=ask_choice(questions[0][0],questions[0][1])
-    print(first_answer)
+    for i in range(3):
+        print()
+        question_answer=ask_choice(questions[i][0],questions[i][1])
+        for value in range(len(questions[i][1])+1):
+            str_answer=questions[i][1][value-1]
+            str_value=str(value)
+            if question_answer.lower() == str_answer.lower() or question_answer == str_value :
+                house = questions[i][2][value-1]
+                score_houses[house] += 3
+                break
 
-    second_answer=ask_choice(questions[1][0],questions[1][1])
-    print(second_answer)
-    third_answer=ask_choice(questions[2][0],questions[2][1])
-    print(third_answer)
+    print()
+    print("Summary of scores :")
+    for key, value in score_houses.items():
+        print(f"{key} : {value} points")
 
 
 
-
-character=init_character("harry","potter",{"Courage":5,"Ambition":9,"Loyalty":2,"Intelligence":4})
-print(assign_house(character,questions))
 
