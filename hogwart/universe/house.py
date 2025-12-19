@@ -1,5 +1,6 @@
-from character import *
+
 from hogwart.utils.input_utils import ask_choice
+
 
 houses = {
  "Gryffindor": 0,

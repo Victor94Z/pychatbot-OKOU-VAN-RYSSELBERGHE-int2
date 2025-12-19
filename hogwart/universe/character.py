@@ -19,7 +19,7 @@ inventory = load_file(INVENTORY_DATA_PATH)
 
 def init_character(last_name, first_name, attributes) :
 
-    character = {
+    character_init = {
         "Last Name" : last_name,
         "First Name" : first_name,
         "Money" : 100,
@@ -28,7 +28,7 @@ def init_character(last_name, first_name, attributes) :
         "Attributes": attributes,
     }
 
-    return character
+    return character_init
 
 
 def display_player(character):
@@ -75,8 +75,8 @@ def add_item (character, key, item):
         print()
         return f"No items have been added to your inventory"
 
-
-'''def item_choice():
+'''
+def item_choice():
 
     for items_id, (items_name,price) in inventory.items():
         nb_item = items_id
@@ -98,9 +98,10 @@ def add_item (character, key, item):
     for j in item_chosed:
         print(j,end=", ")
 
-    return item_chosed'''
+    return item_chosed
 
-
+item_choice()
+'''
 
 
 
