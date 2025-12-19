@@ -1,5 +1,5 @@
 from character import *
-
+#dictionnaire contenant les maisons et leur points attribués
 houses = {
  "Gryffindor": 0,
  "Slytherin": 0,
@@ -7,6 +7,7 @@ houses = {
  "Ravenclaw": 0
 }
 
+#les questions pour savoir la maison du joueur
 questions = [
 ("You see a friend in danger. What do you do?",
 ["Rush to help", "Think of a plan", "Seek help", "Stay calm and observe"],
@@ -20,10 +21,8 @@ questions = [
 ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"])
 ]
 
-player = init_character("a","b")
-display_player(player)
 
-
+#fonction pour assigner une maison au joueur en fonction de ses reponses 
 def assign_house(character):
     for i in range(len(questions)):
         question, answers, answer_houses = questions[i]
@@ -44,21 +43,21 @@ def assign_house(character):
 
     winner = max(houses, key=houses.get)
     print("Votre maison est :", winner)
-
+player = init_character('a','n')
 assign_house(player)
 
+#fonction pour update les points d'une maison
+def update_house_points(house_name,points):
 
+    houses[house_name] = points
+    return houses
 
-# def update_house_points(house_name,points):
-
-#     houses[house_name] = points
-#     return houses
-
-# def winning_house():
+#fonction pour definir la maison gagnante
+def winning_house():
     
-#     max_points = max(houses.values())
-#     best = [team for team,points in houses.items() if points == max_points]
-#     if len(best) == 1:
-#         print("La meilleure equipe est ",best[0]," avec ",max_points," points.")
-#     else :
-#          print(f"Egalité entre les equipes : {", ".join(best)} avec {max_points} points.")
+    max_points = max(houses.values())
+    best = [team for team,points in houses.items() if points == max_points]
+    if len(best) == 1:
+        print("La meilleure equipe est ",best[0]," avec ",max_points," points.")
+    else :
+         print(f"Egalité entre les equipes : {", ".join(best)} avec {max_points} points.")
