@@ -145,5 +145,26 @@ def meet_friend(character):
     for i in changed_attributes:
         slow_print(f'{i} : {character["Attributes"][i]}')
 
+def welcome_message():
+    intro = [
+    "Mes chers élèves, c’est avec une grande joie que je vous accueille en ce jour mémorable à Poudlard, ce sanctuaire de magie et de savoir. "
+    "Vous voici à l’aube d’un voyage extraordinaire, un périple qui vous mènera bien au-delà des limites de ce que vous croyez connaître. "
+    "Ici, entre ces murs anciens, se mêlent traditions séculaires et découvertes sans fin. La magie, dans toute sa complexité et sa beauté, vous sera révélée, "
+    "non comme une simple force brute, mais comme un art subtil qui requiert patience, sagesse et un cœur pur.",
 
-meet_friend(player)
+    "N’oubliez jamais que la véritable magie ne réside pas seulement dans les sorts que vous lancerez, ni dans les potions que vous préparerez, "
+    "mais surtout dans les choix que vous ferez. Le courage face à l’adversité, la loyauté envers vos amis, la curiosité insatiable qui pousse à apprendre et à comprendre — "
+    "voilà les véritables pouvoirs qui façonneront votre destin. Chaque échec sera une leçon, chaque réussite une pierre ajoutée à l’édifice de votre caractère.",
+
+    "Poudlard est plus qu’une école : c’est une famille, un foyer où l’amitié et la diversité se célèbrent, où la tolérance et le respect sont les fondations invisibles de notre communauté. "
+    "Vous apprendrez à travailler ensemble, à vous soutenir dans les moments d’ombre et à partager la lumière.",
+
+    "Alors, avancez avec confiance, portez haut l’étendard de votre maison, mais surtout, écoutez la voix de votre conscience. "
+    "Car c’est elle qui guidera vos pas, même lorsque les chemins seront obscurs. Le futur est un livre blanc, prêt à être écrit par vos actions et votre sagesse. "
+    "Que cette année à Poudlard soit celle où vous découvrirez non seulement la magie du monde, mais aussi la magie en vous-même."
+]
+
+    for paragraph in intro:
+        slow_print(paragraph)
+        input("\nAppuie sur Entrée pour continuer...\n")
+

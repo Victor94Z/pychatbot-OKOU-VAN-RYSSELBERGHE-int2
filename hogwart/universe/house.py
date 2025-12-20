@@ -79,37 +79,25 @@ def display_winning_house(houses):
         print(f"Houses {", ".join(winning_house)} are tied with {max_points} points each.")
 
 def assign_house(character,questions):
-    score_houses={"Gryffindor":0,"Slytherin":0,"Hufflepuff":0,"Ravenclaw":0}
-    character_attributes = character["Attributes"]
+    for i in range(len(questions)):
+        question, answers, answer_houses = questions[i]
 
-    # Initialise houses points
-    for key,value in character_attributes.items():
-        if key == 'Courage' :
-            score_houses["Gryffindor"] += value*2
-        elif key == 'Ambition' :
-            score_houses["Slytherin"] += value*2
-        elif key == 'Loyalty' :
-            score_houses["Hufflepuff"] += value*2
-        elif key == 'Intelligence' :
-            score_houses["Ravenclaw"] += value*2
+        print(question)
+        for j in range(len(answers)):
+            print(j + 1, ": ", answers[j])
 
-    #Attribute points with questions
-    print()
-    for i in range(3):
-        print()
-        question_answer=ask_choice(questions[i][0],questions[i][1])
-        for value in range(len(questions[i][1])+1):
-            str_answer=questions[i][1][value-1]
-            str_value=str(value)
-            if question_answer.lower() == str_answer.lower() or question_answer == str_value :
-                house = questions[i][2][value-1]
-                score_houses[house] += 3
-                break
+        ans = int(input("Quelle est votre réponse : "))
 
-    print()
-    print("Summary of scores :")
-    for key, value in score_houses.items():
-        print(f"{key} : {value} points")
+        chosen_house = answer_houses[ans - 1]
+        houses[chosen_house] += 1
+
+    houses["Gryffindor"] += character["courage"] * 2
+    houses["Slytherin"] += character["ambition"] * 2
+    houses["Hufflepuff"] += character["loyalty"] * 2
+    houses["Ravenclaw"] += character["intelligence"] * 2
+
+    winner = max(houses, key=houses.get)
+    print("Votre maison est :",winner)
 
 
 
