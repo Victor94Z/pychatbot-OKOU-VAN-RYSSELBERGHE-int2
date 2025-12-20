@@ -56,11 +56,19 @@ def assign_house(character,questions):
         slow_print(question)
         for j in range(len(answers)):
             slow_print(f"{j + 1} :  {answers[j]}")
+        ans = "0"  
+        while True:
+            ans = input("\n What is your answer ? : ")
+            try:
+                answer_int = int(ans)
+                if 1 <= answer_int <= 4:
+                    break  
+                else:
+                    slow_print("This is not a valid choice")
+            except ValueError:
+                slow_print("Please enter a valid integer")
 
-        ans = int(input("\n What is your answer ? : "))
-        print()
-
-        chosen_house = answer_houses[ans - 1]
+        chosen_house = answer_houses[int(ans) - 1]
         houses[chosen_house] += 1
 
     houses["Gryffindor"] += character["Attributes"]["Courage"] * 2
