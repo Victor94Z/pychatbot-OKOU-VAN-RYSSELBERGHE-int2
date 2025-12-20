@@ -26,7 +26,7 @@ def init_character(last_name, first_name, attributes) :
         "Spells" : [],
         "Inventory" : [],
         "Attributes": attributes,
-        "House" : []
+        "House" : ""
     }
 
     return character_init

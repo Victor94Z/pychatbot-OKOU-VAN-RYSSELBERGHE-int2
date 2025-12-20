@@ -1,7 +1,12 @@
 import time
+import os
 from hogwart.chapters.chapter_1 import create_character
-from hogwart.utils.input_utils import slow_print
+from hogwart.utils.input_utils import slow_print, load_file
 from hogwart.universe.house import assign_house
+from hogwart.universe.character import BASE_DIR
+
+HOUSES_DATA_PATH = os.path.join(BASE_DIR, "data", "houses.json")
+houses = load_file(HOUSES_DATA_PATH)
 
 player = create_character()
 
@@ -192,7 +197,16 @@ questions = [
 
 def sorting_ceremony(character):
     house =  assign_house(character,questions)
-    character[house] = house
+    character["House"] = house
     slow_print(f"The Sorting Hat exclaims: {house} !\n You join the {house} students to loud cheers !")
 
+def enter_common_room(character):
+    player_house = character["House"]
+    slow_print(f"""You follow the prefects through the castle corridors...\n 
+    {houses[player_house]["emoji"]} {houses[player_house]["description"]} \n 
+    {houses[player_house]["installation_message"]}\n""")
+    colors = ", ".join(houses[player_house]["colors"])
+    slow_print(f"Your colors are : {colors}")
+
 sorting_ceremony(player)
+enter_common_room(player)
