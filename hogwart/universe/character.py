@@ -20,28 +20,33 @@ inventory = load_file(INVENTORY_DATA_PATH)
 def init_character(last_name, first_name, attributes) :
 
     character_init = {
-        "Last Name" : last_name,
-        "First Name" : first_name,
+        "Last_Name" : last_name,
+        "First_Name" : first_name,
         "Money" : 100,
         "Spells" : [],
         "Inventory" : [],
         "Attributes": attributes,
+        "House" : []
     }
 
     return character_init
 
 
-def display_player(character):
-      print("Character profile:")
-      print()
-      print("First Name : ", character["First Name"])
-      print("Last Name : ", character["Last Name"])
-      print("Money : ", character["Money"])
-      print("Spells : ", ", ".join(character["Spells"]))
-      print("Inventory : ", ", ".join(character["Inventory"]))
-      print("Attributes : ")
-      for attr, value in character["Attributes"].items():
-          print(f"- {attr}: {value}")
+def display_player(player):
+
+    print("\n",
+          "First name : ",player["First_Name"],"\n",
+          "Laste name : ",player["Last_Name"],"\n",
+          "House : ",player["House"],"\n",
+          "Money : ",player["Money"],"\n",
+          "Spells : ",", ".join(player["Spells"]),"\n",
+          "Inventory : ", ", ".join(player["Inventory"]),"\n",
+          "Attributes : ","\n",
+          "     courage : ",player["Attributes"]["Courage"],"\n",
+          "     intelligence : ",player["Attributes"]["Intelligence"],"\n",
+          "     loyalty : ",player["Attributes"]["Loyalty"],"\n",
+          "     ambition : ",player["Attributes"]["Ambition"],"\n",
+    )
 
 
 def modify_money(character,amount):

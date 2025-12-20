@@ -1,6 +1,8 @@
 import time
 from hogwart.chapters.chapter_1 import create_character
 from hogwart.utils.input_utils import slow_print
+from hogwart.universe.house import assign_house
+
 player = create_character()
 
 def meet_friend(character):
@@ -166,5 +168,31 @@ def welcome_message():
 
     for paragraph in intro:
         slow_print(paragraph)
-        input("\nAppuie sur Entrée pour continuer...\n")
+        input("\n Appuie sur Entrée pour continuer... \n")
 
+questions = [
+    (
+        "You see a friend in danger. What do you do?",
+        ["Rush to help", "Think of a plan", "Seek help", "Stay calm and observe"],
+        ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]
+    ),
+
+    (
+        "Which trait describes you best?",
+        ["Brave and loyal", "Cunning and ambitious", "Patient and hardworking", "Intelligent and curious"],
+        ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]
+    ),
+
+    (
+        "When faced with a difficult challenge, you...",
+        ["Charge in without hesitation", "Look for the best strategy", "Rely on your friends", "Analyze the problem"],
+        ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]
+    )
+]
+
+def sorting_ceremony(character):
+    house =  assign_house(character,questions)
+    character[house] = house
+    slow_print(f"The Sorting Hat exclaims: {house} !\n You join the {house} students to loud cheers !")
+
+sorting_ceremony(player)
