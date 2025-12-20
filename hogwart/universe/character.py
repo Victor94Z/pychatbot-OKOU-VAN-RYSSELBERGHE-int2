@@ -1,21 +1,5 @@
 
-import os
-
-from hogwart.utils.input_utils import ask_choice, load_file
-
-# folder of THIS file (hogwart/universe)
-CURRENT_DIR = os.path.dirname(__file__)
-
-# go up one folder: hogwart/
-BASE_DIR = os.path.dirname(CURRENT_DIR)
-
-# build full path: hogwart/data/houses.json
-INVENTORY_DATA_PATH = os.path.join(BASE_DIR, "data", "inventory.json")
-HOUSES_DATA_PATH = os.path.join(BASE_DIR, "data", "houses.json")
-
-house = load_file(HOUSES_DATA_PATH)
-inventory = load_file(INVENTORY_DATA_PATH)
-
+from hogwart.utils.input_utils import ask_choice
 
 def init_character(last_name, first_name, attributes) :
 

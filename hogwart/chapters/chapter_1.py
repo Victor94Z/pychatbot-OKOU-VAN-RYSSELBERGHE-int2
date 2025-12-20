@@ -1,14 +1,13 @@
 import time
-import os
 
 
-from hogwart.utils.input_utils import ask_text, ask_number, ask_choice, load_file
-from hogwart.universe.character import init_character, display_player,BASE_DIR,modify_money
+from hogwart.utils.input_utils import ask_text, ask_number, ask_choice, load_file, build_file_path
+from hogwart.universe.character import init_character, display_player,modify_money
 
 
 
-INVENTORY_DATA_PATH = os.path.join(BASE_DIR, "data", "inventory.json")
-HOUSES_DATA_PATH = os.path.join(BASE_DIR, "data", "houses.json")
+INVENTORY_DATA_PATH = build_file_path("inventory.json")
+HOUSES_DATA_PATH = build_file_path("houses.json")
 
 house = load_file(HOUSES_DATA_PATH)
 inventory = load_file(INVENTORY_DATA_PATH)
@@ -313,6 +312,7 @@ def start_chapter_1():
     print('{:^130}'.format("Wand in hand, pet at your side,it’s time to face classes, mysteries, and questionable life choices. "))
     print()
     print('{:^130}'.format("Welcome to Hogwarts..."))
+    return character
 
 
 

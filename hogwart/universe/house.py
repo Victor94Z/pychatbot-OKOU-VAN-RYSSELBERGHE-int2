@@ -1,36 +1,6 @@
 
 
 from hogwart.utils.input_utils import ask_choice
-from hogwart.universe.character import init_character, display_player
-
-'''houses = {
- "Gryffindor": 0,
- "Slytherin": 0,
- "Hufflepuff": 0,
- "Ravenclaw": 0
-}'''
-'''
-questions = [
-    (
-        "You see a friend in danger. What do you do?",
-        ["Rush to help", "Think of a plan", "Seek help", "Stay calm and observe"],
-        ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]
-    ),
-
-    (
-        "Which trait describes you best?",
-        ["Brave and loyal", "Cunning and ambitious", "Patient and hardworking", "Intelligent and curious"],
-        ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]
-    ),
-
-    (
-        "When faced with a difficult challenge, you...",
-        ["Charge in without hesitation", "Look for the best strategy", "Rely on your friends", "Analyze the problem"],
-        ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]
-    )
-]
-
-'''
 
 def  update_house_points( houses, house_name, points):
 
@@ -44,7 +14,7 @@ def  update_house_points( houses, house_name, points):
             print(f"{house_name} wins {abs(points)} points ")
         houses[house_name] += points
         print()
-        print("The points are now : ",end="")
+        print(f"The points are now : {houses} ",end="")
         return houses
 
     else:
@@ -92,7 +62,7 @@ def display_winning_house(houses):
 
 def assign_house(character,questions):
 
-    character_attributes = character["Attributes"]
+    character_attributes = character['Attributes']
 
     score_houses={"Gryffindor": 0,"Slytherin": 0,"Hufflepuff":0,"Ravenclaw": 0}
 
@@ -161,15 +131,15 @@ def assign_house(character,questions):
         if tie_answer.lower() == tie_choices[i].lower() or tie_answer == str(i + 1):
             final_house = tied_houses[i]
             print(f"\nCongratulations ! You have been sorted into {final_house}!")
+            print()
             return final_house
 
     return None
 
 
 
-
-
 '''
+
 def_character = init_character("OKOU","Victor",{"Courage":5,"Intelligence":5,"Loyalty":5,"Ambition":5})
 house=update_house_points({"Gryffindor": 0,"Slytherin": 0,"Hufflepuff": 0,"Ravenclaw": 0},"Gryffindor",150)
 print(house)

@@ -1,4 +1,6 @@
 import json
+import os
+
 
 def ask_text(question):
 
@@ -34,8 +36,23 @@ def ask_choice(question, choices_list):
 
     return answer.strip()
 
+def build_file_path(file_name):
+
+    # folder of THIS file (hogwart/utils)
+    current_dir = os.path.dirname(__file__)
+
+    # go up one folder: hogwart/
+    base_dir = os.path.dirname(current_dir)
+
+    # build full path: hogwart/data/file_name
+    file_path = os.path.join(base_dir, "data", file_name)
+
+    return file_path
+
+
 
 def load_file(file_path):
+
     with open(file_path, "r", encoding="utf-8") as f:
         data = json.load(f)
         return data
