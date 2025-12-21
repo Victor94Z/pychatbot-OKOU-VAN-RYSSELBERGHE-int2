@@ -99,7 +99,6 @@ def  create_character(max_points=24):
     print()
     display_player(character)
     print()
-    print(input("Press Enter to continue..."))
 
     return character
 
@@ -124,12 +123,12 @@ def receive_letter():
     print()
     print("Dear Student,")
     print()
-    time.sleep(1.2)
+    time.sleep(1)
     print("We are pleased to inform you that you have been accepted to Hogwarts School of Witchcraft and Wizardry!” ")
     print()
     print(('{:^130}'.format("---------------------------------------------------------------------------")))
     print()
-    time.sleep(1.2)
+    time.sleep(1)
 
     # Accept or refuse Hogwarts
     accept_invitation=ask_choice("Do you accept this invitation and go to Hogwarts?", ["Yes, of course!", "No, I'd rather stay with Uncle Vernon..."])
@@ -153,13 +152,13 @@ def receive_letter():
 def meet_hagrid(character):
     slow_print("\n Suddenly, a loud crash echoes from the door. A giant figure stands there, but you have no idea who he is or what he wants.")
     print()
-    time.sleep(2.5)
+    time.sleep(1.5)
     print(f"You: ( * With a trembling voice * ) 'Uh… who are you?'")
     print()
-    time.sleep(2.5)
+    time.sleep(1.5)
     print(f"Stranger: 'Hello {character["First Name"]}! I'm Hagrid. Dumbledore, the headmaster of Hogwarts, sent me to guide you to the school.'")
     print()
-    time.sleep(2.5)
+    time.sleep(1.5)
 
     #Accept or refuse following Hagrid
     choice=ask_choice("Do you want to follow Hagrid ?", ["Yes", "No"])
@@ -168,11 +167,11 @@ def meet_hagrid(character):
     else:
         print("* You hesitate, but Hagrid gently insists and takes you along anyway! *")
         print()
-        time.sleep(2)
+        time.sleep(1)
         print("Hagrid: 'No worries, but first we have to go shopping in Diagon Alley!'")
 
     print()
-    time.sleep(2.5)
+    time.sleep(1)
     print("* Together, you leave the house and head toward Diagon Alley, ready for magical adventures… *")
 
 
