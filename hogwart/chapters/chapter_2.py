@@ -1,6 +1,5 @@
 import time
 
-# Imports from the project
 from hogwart.utils.input_utils import slow_print, load_file, build_file_path
 from hogwart.universe.house import assign_house
 from hogwart.universe.character import display_player
