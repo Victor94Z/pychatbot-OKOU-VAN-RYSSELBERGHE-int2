@@ -1,46 +1,44 @@
 import time
 
 
-from hogwart.utils.input_utils import ask_text, ask_number, ask_choice, load_file, build_file_path
+from hogwart.utils.input_utils import ask_text, ask_number, ask_choice, load_file, build_file_path,slow_print
 from hogwart.universe.character import init_character, display_player,modify_money
 
 
-
+# Paths to data files
 INVENTORY_DATA_PATH = build_file_path("inventory.json")
 HOUSES_DATA_PATH = build_file_path("houses.json")
 
+# Load data
 house = load_file(HOUSES_DATA_PATH)
 inventory = load_file(INVENTORY_DATA_PATH)
 
-#introduces the player at the beginning of the story
+# Introduces the player at the beginning of the story
 def introduction():
     print(input("Press Enter to begin the game..."))
     print()
-    print('{:^130}'.format("Welcome to a world where magic is real…"))
+    slow_print('{:^130}'.format("Welcome to a world where magic is real…"))
     print()
-    time.sleep(2)
-    print('{:^130}'.format("For as long as you can remember, you have felt different."))
-    time.sleep(2)
-    print('{:^130}'.format(" Strange and unexplainable events have always seemed to happen around you, leaving you with more questions than answers."))
+    slow_print('{:^130}'.format("For as long as you can remember, you have felt different."))
+    slow_print('{:^130}'.format(" Strange and unexplainable events have always seemed to happen around you, leaving you with more questions than answers."))
     print()
     print(input("Press Enter to continue..."))
-    print('{:^130}'.format("Today marks the beginning of a new chapter in your life."))
-    time.sleep(2)
-    print('{:^130}'.format("You stand on the edge of something unknown, something extraordinary, even if you do not fully understand it yet."))
+    slow_print('{:^130}'.format("Today marks the beginning of a new chapter in your life."))
+    slow_print('{:^130}'.format("You stand on the edge of something unknown, something extraordinary, even if you do not fully understand it yet."))
     print()
     print(input("Press Enter to continue..."))
-    print('{:^130}'.format("An incredible journey awaits you — a journey filled with discoveries, challenges, and wonders beyond imagination."))
-    time.sleep(3)
-    print('{:^130}'.format("Your story begins now."))
+    slow_print('{:^130}'.format("An incredible journey awaits you — a journey filled with discoveries, challenges, and wonders beyond imagination."))
+    slow_print('{:^130}'.format("Your story begins now."))
     print()
     print(input("Press Enter to continue..."))
     print()
 
-
+# Create the player's character
 def  create_character(max_points=24):
     remaining_points = max_points
     attributes={}
 
+    # Ask for character identity
     last_name=ask_text("Enter your character's last name : ")
     first_name=ask_text("Enter your character's first name : ")
 
@@ -51,14 +49,17 @@ def  create_character(max_points=24):
 
     different_attribute = ["Courage", "Intelligence", "Loyalty", "Ambition"]
 
+    # Distribution of attribute points with a limit so the game isn't too easy
     end="False"
     while end == "False":
         remaining_points = max_points
 
+        # Attribute distribution
         for attribute in different_attribute:
             print()
             print("Remaining points : ", remaining_points)
 
+            # No points left
             if remaining_points == 0 :
                 attributes[attribute] = 0
                 print(f"{attribute} level (1-10) : 0")
@@ -66,6 +67,7 @@ def  create_character(max_points=24):
 
             answer=ask_number(f"{attribute} level (1-10) : ",1,10)
 
+            # Prevent using more points than available
             while answer > remaining_points:
                 print("You do not have enough points remaining.")
                 answer=ask_number(f"{attribute} level (1-10) : ",1,10)
@@ -73,6 +75,7 @@ def  create_character(max_points=24):
             attributes[attribute]=answer
             remaining_points -= answer
 
+        # Handle remaining points
         if remaining_points > 0:
             print()
             print(f"You still have {remaining_points} points to assign")
@@ -90,7 +93,7 @@ def  create_character(max_points=24):
             else:
                 print("Please start again")
 
-
+    # Initialize character
     character= init_character(last_name,first_name,attributes)
 
     print()
@@ -100,25 +103,20 @@ def  create_character(max_points=24):
 
     return character
 
-
-
+# Receive Hogwarts letter
 def receive_letter():
     print()
-    print(('{:^130}'.format("Night falls quietly around you.")))
-    time.sleep(1.3)
-    print('{:^130}'.format("The world seems calm… almost too calm."))
-    time.sleep(2)
-    print('{:^130}'.format("Suddenly, the sound of wings cuts through the silence."))
+    slow_print(('{:^130}'.format("Night falls quietly around you.")))
+    slow_print('{:^130}'.format("The world seems calm… almost too calm."))
+    slow_print('{:^130}'.format("Suddenly, the sound of wings cuts through the silence."))
     print()
     print(input("Press Enter to continue..."))
-    print('{:^130}'.format("The creature observes you for a moment before extending its leg."))
-    time.sleep(2)
-    print(('{:^130}'.format("Attached to it is an old parchment, carefully rolled and sealed with red wax bearing the Hogwarts crest.")))
+    slow_print('{:^130}'.format("The creature observes you for a moment before extending its leg."))
+    slow_print(('{:^130}'.format("Attached to it is an old parchment, carefully rolled and sealed with red wax bearing the Hogwarts crest.")))
     print()
     print(input("Press Enter to continue..."))
-    print(('{:^130}'.format("Moments later, the owl takes flight and disappears into the darkness, leaving the letter behind.")))
-    time.sleep(2)
-    print(('{:^130}'.format("Curious and slightly nervous, you pick it up and gently break the seal.")))
+    slow_print(('{:^130}'.format("Moments later, the owl takes flight and disappears into the darkness, leaving the letter behind.")))
+    slow_print(('{:^130}'.format("Curious and slightly nervous, you pick it up and gently break the seal.")))
     print()
     print(input("Press Enter to read the letter..."))
     print()
@@ -132,23 +130,28 @@ def receive_letter():
     print(('{:^130}'.format("---------------------------------------------------------------------------")))
     print()
     time.sleep(1.2)
+
+    # Accept or refuse Hogwarts
     accept_invitation=ask_choice("Do you accept this invitation and go to Hogwarts?", ["Yes, of course!", "No, I'd rather stay with Uncle Vernon..."])
     if accept_invitation.lower() == "yes, of course!" or accept_invitation.lower() == "1":
         print()
         print("Congratulations,you have been accepted to Hogwarts!")
     else:
         print()
-        print("You tear up the letter, and Uncle Vernon cheers :","\n","\n","EXCELLENT! Finally, someone NORMAL in this house!")
+        slow_print("You tear up the letter, and Uncle Vernon cheers : ")
         print()
-        print("The magical world will never know you existed...")
+        slow_print("\nEXCELLENT! Finally, someone NORMAL in this house!")
+        print()
+        slow_print("The magical world will never know you existed...")
         print()
         time.sleep(1.2)
         print(('{:^130}'.format("GAME OVER")))
         exit()
     print()
 
+#Meeting Hagrid
 def meet_hagrid(character):
-    print("\n Suddenly, a loud crash echoes from the door. A giant figure stands there, but you have no idea who he is or what he wants.")
+    slow_print("\n Suddenly, a loud crash echoes from the door. A giant figure stands there, but you have no idea who he is or what he wants.")
     print()
     time.sleep(2.5)
     print(f"You: ( * With a trembling voice * ) 'Uh… who are you?'")
@@ -157,8 +160,9 @@ def meet_hagrid(character):
     print(f"Stranger: 'Hello {character["First Name"]}! I'm Hagrid. Dumbledore, the headmaster of Hogwarts, sent me to guide you to the school.'")
     print()
     time.sleep(2.5)
-    choice=ask_choice("Do you want to follow Hagrid ?", ["Yes", "No"])
 
+    #Accept or refuse following Hagrid
+    choice=ask_choice("Do you want to follow Hagrid ?", ["Yes", "No"])
     if choice.lower() == "yes" or choice.lower() == "1":
         print("Hagrid: 'Perfect! But before we head to Hogwarts, we need to do some shopping in Diagon Alley.'")
     else:
@@ -172,14 +176,15 @@ def meet_hagrid(character):
     print("* Together, you leave the house and head toward Diagon Alley, ready for magical adventures… *")
 
 
+# Shopping sequence in Diagon Alley
 def buy_supplies(character):
-    print(f"Welcome to Diagon Alley {character["First Name"]}! \n")
+    slow_print(f"Welcome to Diagon Alley {character["First Name"]}! \n")
 
 
     required_items = ["Magic Wand", "Wizard Robe", "Potions Book"]
     buy_required = []
 
-    # Display catalog
+    # Display available items
     print("Catalog of available items:\n")
     for key, (name, price) in inventory.items():
         required = " (required)" if name in required_items else ""
@@ -191,7 +196,7 @@ def buy_supplies(character):
         remaining = [item for item in required_items if item not in buy_required]
         print("Remaining required items:", ", ".join(remaining))
 
-        #
+        # Lose if no money left ( no need to continue )
         if len(remaining) > 0 and character["Money"]==0:
             print("You don't have enough money to buy all the requested items. You lose the game. You only had 3 items to buy, really, how do you manage your money ?!\n")
             print('{:^130}'.format("GAME OVER"))
@@ -203,8 +208,9 @@ def buy_supplies(character):
             choice = input("Invalid choice. Enter a valid item number: ").strip()
 
         item_name, item_price = inventory[choice]
-
         buy_item=True
+
+        # Warn for non-required items
         if item_name not in required_items:
             print("\nThis item is not required right now.")
             buy_not_required=ask_choice("Are you really sure you want to buy this item? Be careful, this choice could have consequences for the rest of your adventure.",["Yes","No"])
@@ -216,14 +222,13 @@ def buy_supplies(character):
                     print("\nYou don't have enough money !\n")
                     continue
 
-
+        #Lose if there are items remaining and not enough money
         if [item_name in remaining] and item_price > character["Money"] :
             print("You don't have enough money to buy all the requested items. You lose the game. You only had 3 items to buy, really, how do you manage your money ?!\n")
             print('{:^130}'.format("GAME OVER"))
             exit()
 
-
-
+        # Purchase
         if buy_item:
             modify_money(character,-item_price)
             character["Inventory"].append(item_name)
@@ -237,7 +242,7 @@ def buy_supplies(character):
     print(f"\nYou have {character["Money"]} Galleons.")
     print("\nAll required items have been purchased!")
 
-
+# Choose a pet
 def character_pet(character):
 
     # Pets
@@ -266,13 +271,13 @@ def character_pet(character):
 
     min_price = min(pet_prices)
 
-
-
+    # Check if player can buy any pet
     if character["Money"] < min_price:
         print("You don't have enough money to buy any pet. You lose the game.")
         print('{:^130}'.format("GAME OVER"))
         exit()
 
+    # Pet selection loop
     while True:
         choice = input("\nEnter the number of the pet you want: ").strip()
 
@@ -296,6 +301,7 @@ def character_pet(character):
 
     display_player(character)
 
+# Start chapter 1 of the game
 def start_chapter_1():
     introduction()
     character = create_character()
@@ -307,11 +313,11 @@ def start_chapter_1():
     print(input("\nPress Enter to continue..."))
     character_pet(character)
     print()
-    print('{:^130}'.format("End of Chapter 1! You survived Diagon Alley without going bankrupt (well done). "))
+    slow_print('{:^130}'.format("End of Chapter 1! You survived Diagon Alley without going bankrupt (well done). "))
     print()
-    print('{:^130}'.format("Wand in hand, pet at your side,it’s time to face classes, mysteries, and questionable life choices. "))
+    slow_print('{:^130}'.format("Wand in hand, pet at your side,it’s time to face classes, mysteries, and questionable life choices. "))
     print()
-    print('{:^130}'.format("Welcome to Hogwarts..."))
+    slow_print('{:^130}'.format("Welcome to Hogwarts..."))
     return character
 
 

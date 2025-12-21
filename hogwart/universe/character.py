@@ -1,91 +1,73 @@
 
 from hogwart.utils.input_utils import ask_choice
 
+# Create and initialize a character
 def init_character(last_name, first_name, attributes) :
 
     character_init = {
-        "Last Name" : last_name,
-        "First Name" : first_name,
-        "Money" : 100,
-        "Spells" : [],
-        "Inventory" : [],
-        "Attributes": attributes,
+        "Last Name" : last_name,             # Character last name
+        "First Name" : first_name,           # Character first name
+        "Money" : 100,                       # Starting money
+        "Spells" : [],                       # Known spells
+        "Inventory" : [],                    # Items owned
+        "Attributes": attributes,            # Character attributes
     }
-
     return character_init
 
 
+# Display all information about the character
 def display_player(character):
-      print("Character profile:")
-      print()
+
+      print("Character profile:\n")
       print("First Name : ", character["First Name"])
       print("Last Name : ", character["Last Name"])
       print("Money : ", character["Money"])
-      print("Spells : ", ", ".join(character["Spells"]))
-      print("Inventory : ", ", ".join(character["Inventory"]))
+      print("Spells : ", ", ".join(character["Spells"]))                # Display all spells separate by a comma
+      print("Inventory : ", ", ".join(character["Inventory"]))          # Display all items in inventory separate by a comma
       print("Attributes : ")
-      for attr, value in character["Attributes"].items():
+      for attr, value in character["Attributes"].items():               # Display character attributes with good syntax
           print(f"- {attr}: {value}")
 
 
+# Modify the character's money
 def modify_money(character,amount):
 
+    # Update money
     character["Money"] += amount
     print()
+
+    #Display result
     if amount > 0 :
         print(f"You have won {amount} galleons !")
         print()
         print("Your money : ",character["Money"])
     else:
-        print(f"You have lost {abs(amount)} galleons !")
+        print(f"You have lost {amount} galleons !")
         print()
         print("Your money : ",character["Money"])
 
 
 
 
-
+# Add an item to the character inventory
 def add_item (character, key, item):
     print(f"You found: : {item} ")
     print()
+
+    # Ask player if they want to keep the item
     answer =ask_choice(f"Do you want to add '{item}' to your inventory ?",["Yes","No"])
 
+    # Add item if accepted
     if answer.lower() == "yes" or answer.lower() == "1":
         character[key].append(item)
         print()
         return f"You added {item} to your inventory !"
 
+    # Otherwise, do nothing
     else:
         print()
         return f"No items have been added to your inventory"
 
-'''
-def item_choice():
-
-    for items_id, (items_name,price) in inventory.items():
-        nb_item = items_id
-        print(items_id," : ",items_name)
-
-    item_chosed = []
-    choice = input("Quel objet voulez vous choisir : ").split(" ")
-    for i in choice :
-        if i == "0" :
-            print("Vous n'avez rien choisi")
-            return []
-        if i in inventory:
-            item_name = inventory[i][0]
-            item_chosed.append(item_name)
-        else :
-            print("L'objet",i," n'est pas disponible bahahaa")
-
-    print("Vous avez choisi : ",end=" ")
-    for j in item_chosed:
-        print(j,end=", ")
-
-    return item_chosed
-
-item_choice()
-'''
 
 
 
