@@ -3,7 +3,7 @@ import os
 from hogwart.chapters.chapter_1 import create_character
 from hogwart.utils.input_utils import slow_print, load_file
 from hogwart.universe.house import assign_house
-from hogwart.universe.character import BASE_DIR
+from hogwart.universe.character import BASE_DIR, display_player
 
 HOUSES_DATA_PATH = os.path.join(BASE_DIR, "data", "houses.json")
 houses = load_file(HOUSES_DATA_PATH)
@@ -15,11 +15,10 @@ def meet_friend(character):
     changed_attributes = []
 
     slow_print('{:^130}'.format("You board the Hogwarts Express. The train slowly departs northward... \n"))#train introduction
-    time.sleep(2)
+    time.sleep(1)
 
 
     slow_print('{:^130}'.format("A red-haired boy enters your compartment, looking friendly. \n"))
-    time.sleep(2)
 
     answer_ron = {"1" : "Sure, have a seat !","2" : "Sorry, i prefer to travel alone."}#ron possible responses
     slow_print("—Hi! I'm Ron Weasley. Mind if I sit with you ? \n")
@@ -50,15 +49,15 @@ def meet_friend(character):
         slow_print("\n Ron break down in tears: - NOOOOOOOOO WHHYYYYYYYYYY !!!!!!! ")
         time.sleep(1)
         slow_print("...")
-        time.sleep(1)
+        time.sleep(2)
         slow_print("he evaporates in the air as you think of what you did...\n")
         change = "Ambition"
         character["Attributes"][change] += 1
         if not change in changed_attributes:
             changed_attributes.append(change)
 
+    time.sleep(1)
     slow_print('{:^130}'.format("A girl enters next, already carrying a stack of books. \n"))
-    time.sleep(2)
 
 
 
@@ -98,8 +97,8 @@ def meet_friend(character):
         if not change in changed_attributes:
             changed_attributes.append(change)
     
+    time.sleep(1)
     slow_print('{:^130}'.format("Then a blonde boy enters, looking arrogant. \n"))
-    time.sleep(2)
 
 
 
@@ -154,26 +153,26 @@ def meet_friend(character):
 
 def welcome_message():
     intro = [
-    "Mes chers élèves, c’est avec une grande joie que je vous accueille en ce jour mémorable à Poudlard, ce sanctuaire de magie et de savoir. "
-    "Vous voici à l’aube d’un voyage extraordinaire, un périple qui vous mènera bien au-delà des limites de ce que vous croyez connaître. "
-    "Ici, entre ces murs anciens, se mêlent traditions séculaires et découvertes sans fin. La magie, dans toute sa complexité et sa beauté, vous sera révélée, "
-    "non comme une simple force brute, mais comme un art subtil qui requiert patience, sagesse et un cœur pur.",
+    "My dear students, it is with great joy that I welcome you on this most memorable day to Hogwarts, a sanctuary of magic and knowledge."
+    "You stand now at the threshold of an extraordinary journey — one that will carry you far beyond the boundaries of what you believe you know." 
+    "Within these ancient walls, time-honoured traditions walk hand in hand with endless discovery."
+    "Here, magic will reveal itself to you not as a force to be wielded without thought, but as a delicate art, demanding patience, wisdom, and a true heart." ,
 
-    "N’oubliez jamais que la véritable magie ne réside pas seulement dans les sorts que vous lancerez, ni dans les potions que vous préparerez, "
-    "mais surtout dans les choix que vous ferez. Le courage face à l’adversité, la loyauté envers vos amis, la curiosité insatiable qui pousse à apprendre et à comprendre — "
-    "voilà les véritables pouvoirs qui façonneront votre destin. Chaque échec sera une leçon, chaque réussite une pierre ajoutée à l’édifice de votre caractère.",
+    "Never forget that the truest magic does not lie solely in the spells you cast, nor in the potions you brew, but in the choices you make."
+    "Courage in the face of adversity, loyalty to those who stand beside you, and the unyielding curiosity that drives you to learn and to understand "
+    "— these are the powers that will shape your destiny. Each failure will become a lesson, and each success a stone laid upon the foundation of your character.",
 
-    "Poudlard est plus qu’une école : c’est une famille, un foyer où l’amitié et la diversité se célèbrent, où la tolérance et le respect sont les fondations invisibles de notre communauté. "
-    "Vous apprendrez à travailler ensemble, à vous soutenir dans les moments d’ombre et à partager la lumière.",
+    "Hogwarts is more than a school; it is a family — a home where friendship is forged, where differences are celebrated, and where tolerance and respect form the unseen pillars of our community."
+    "Here, you will learn not only to excel on your own, but to stand together, to support one another in moments of darkness, and to share the light when it shines.",
 
-    "Alors, avancez avec confiance, portez haut l’étendard de votre maison, mais surtout, écoutez la voix de votre conscience. "
-    "Car c’est elle qui guidera vos pas, même lorsque les chemins seront obscurs. Le futur est un livre blanc, prêt à être écrit par vos actions et votre sagesse. "
-    "Que cette année à Poudlard soit celle où vous découvrirez non seulement la magie du monde, mais aussi la magie en vous-même."
+    "So walk forward with confidence. Wear the colours of your house with pride, but above all, listen to the quiet voice of your conscience."
+    "It will guide your steps when the path grows uncertain. The future before you is a blank page, waiting to be written by your actions and your wisdom."
+    "May this year at Hogwarts be the one in which you discover not only the magic of the world around you, but the magic that resides within yourselves."
 ]
 
     for paragraph in intro:
         slow_print(paragraph)
-        input("\n Appuie sur Entrée pour continuer... \n")
+        input("\n Press Enter to continue... \n")
 
 questions = [
     (
@@ -208,5 +207,19 @@ def enter_common_room(character):
     colors = ", ".join(houses[player_house]["colors"])
     slow_print(f"Your colors are : {colors}")
 
-sorting_ceremony(player)
-enter_common_room(player)
+def start_chapter_2(character):
+    meet_friend(character)
+    time.sleep(1)
+    welcome_message()
+    time.sleep(1)
+    sorting_ceremony(character)
+    time.sleep(1)
+    enter_common_room(character)
+    time.sleep(1)
+    display_player(character)
+    slow_print("Thus the chapter draws to a close, not with an ending, but with a pause — the kind that lingers in the air like the final note of a spell well cast. \n" \
+    "The castle settles, torches bow to the night, and the echoes of discovery fade into the ancient stone. What has been learned is now yours to carry, for wisdom, once awakened, never truly sleeps.\n"
+    "And now… the hour turns.\n"
+    "The bells of Hogwarts toll softly, summoning minds and hearts alike. Corridors stir, doors creak open, and classrooms await their stories yet untold. Step forward with resolve, steady your hand and sharpen your intent — for classes begin, and within them lie the first sparks of greatness.\n")
+    
+start_chapter_2(player)
