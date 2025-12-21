@@ -1,6 +1,6 @@
 import time
 
-from hogwart.utils.input_utils import slow_print, load_file, build_file_path
+from hogwart.utils.input_utils import slow_print, load_file, build_file_path, ask_choice
 from hogwart.universe.house import assign_house
 from hogwart.universe.character import display_player
 
@@ -29,30 +29,12 @@ def meet_friend(character):
         "A red-haired boy enters your compartment, looking friendly.\n"
     ))
 
-    answer_ron = {
-        "1": "Sure, have a seat!",
-        "2": "Sorry, I prefer to travel alone."
-    }
+    answer_ron = ["Sure, have a seat!", "Sorry, I prefer to travel alone."]
 
     slow_print("— Hi! I'm Ron Weasley. Mind if I sit with you?\n")
-    slow_print("How do you respond?\n")
+    choice = ask_choice("How do you respond?", answer_ron)
 
-    # Display possible answers
-    for key in answer_ron:
-        slow_print(f"{key}: {answer_ron[key]}")
-
-    # Input validation loop
-    while True:
-        answer = input("\nYour choice: ")
-        try:
-            if 1 <= int(answer) <= len(answer_ron):
-                break
-            slow_print("This is not a valid choice\n")
-        except ValueError:
-            slow_print("Please enter a valid integer\n")
-
-    # Apply consequences
-    if int(answer) == 1:
+    if choice == "1" or choice.lower() == answer_ron[0].lower():
         slow_print("\nRon smiles: — Awesome! You'll see, Hogwarts is amazing!\n")
         change = "Loyalty"
     else:
@@ -62,6 +44,7 @@ def meet_friend(character):
         time.sleep(2)
         slow_print("He evaporates into thin air as you reflect on your choice...\n")
         change = "Ambition"
+
 
     character["Attributes"][change] += 1
     if change not in changed_attributes:
@@ -75,29 +58,15 @@ def meet_friend(character):
         "A girl enters next, already carrying a stack of books.\n"
     ))
 
-    answer_hermione = {
-        "1": "Yes, I love learning new things!",
-        "2": "Uh… no, I prefer adventures over books."
-    }
+    answer_hermione = ["Yes, I love learning new things!","Uh… no, I prefer adventures over books."]
 
-    slow_print(
-        "— Hello, I'm Hermione Granger. Have you ever read 'A History of Magic'?\n\n"
-        "How do you respond?\n"
-    )
+    slow_print("— Hello, I'm Hermione Granger. Have you ever read 'A History of Magic'?\n")
 
-    for key in answer_hermione:
-        slow_print(f"{key}: {answer_hermione[key]}")
 
-    while True:
-        answer = input("\nYour choice: ")
-        try:
-            if 1 <= int(answer) <= len(answer_hermione):
-                break
-            slow_print("This is not a valid choice\n")
-        except ValueError:
-            slow_print("Please enter a valid integer\n")
 
-    if int(answer) == 1:
+    choice = ask_choice("How do you respond?", answer_hermione)
+
+    if choice == "1" or choice.lower() == answer_hermione[0].lower():
         slow_print("\nHermione smiles, impressed: — Oh, that's rare! You must be very clever!\n")
         change = "Intelligence"
     else:
@@ -117,39 +86,20 @@ def meet_friend(character):
         "Then a blonde boy enters, looking arrogant.\n"
     ))
 
-    answer_draco = {
-        "1": "Shake his hand politely.",
-        "2": "Ignore him completely.",
-        "3": "Respond with arrogance."
-    }
+    answer_draco = ["Shake his hand politely.", "Ignore him completely.","Respond with arrogance."]
 
-    slow_print(
-        "— I'm Draco Malfoy. It's best to choose your friends carefully from the start, don't you think?\n\n"
-        "How do you respond?\n"
-    )
+    slow_print("— I'm Draco Malfoy. It's best to choose your friends carefully from the start, don't you think?\n")
 
-    for key in answer_draco:
-        slow_print(f"{key}: {answer_draco[key]}")
+    choice = ask_choice("How do you respond?", answer_draco)
 
-    while True:
-        answer = input("\nYour choice: ")
-        try:
-            if 1 <= int(answer) <= len(answer_draco):
-                break
-            slow_print("This is not a valid choice\n")
-        except ValueError:
-            slow_print("Please enter a valid integer\n")
-
-    if int(answer) == 1:
+    if choice == "1" or choice.lower() == answer_draco[0].lower():
         slow_print("\nDraco smirks: — Good boy.")
         change = "Ambition"
-    elif int(answer) == 2:
+    elif choice == "2" or choice.lower() == answer_draco[1].lower():
         slow_print("\nDraco frowns, annoyed: — You'll regret that!")
         change = "Loyalty"
     else:
-        slow_print(
-            "\nDraco attempts a backflip, crashes through a window, and disappears into the night, screaming curses...\n"
-        )
+        slow_print("\nDraco attempts a backflip, crashes through a window, and disappears into the night, screaming curses...\n")
         time.sleep(1)
         change = "Courage"
 
@@ -268,10 +218,5 @@ def start_chapter_2(character,houses):
 
     print(input("\nPress enter to continue...\n"))
     return houses
-
-
-
-
-
 
 
