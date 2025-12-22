@@ -11,6 +11,7 @@ def init_character(last_name, first_name, attributes) :
         "Spells" : [],                       # Known spells
         "Inventory" : [],                    # Items owned
         "Attributes": attributes,            # Character attributes
+        "House":""                           # Character attributes
     }
     return character_init
 
@@ -27,6 +28,7 @@ def display_player(character):
       print("Attributes : ")
       for attr, value in character["Attributes"].items():               # Display character attributes with good syntax
           print(f"- {attr}: {value}")
+      print("House : ",character["House"])
 
 
 # Modify the character's money
