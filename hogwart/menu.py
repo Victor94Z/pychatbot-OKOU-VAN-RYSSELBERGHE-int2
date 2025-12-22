@@ -1,6 +1,7 @@
 from hogwart.chapters.chapter_1 import start_chapter_1
 from hogwart.chapters.chapter_2 import start_chapter_2
 from hogwart.chapters.chapter_3 import start_chapter_3
+from hogwart.chapters.chapter_4 import start_chapter_4_quidditch
 from hogwart.utils.input_utils import ask_choice
 
 
@@ -9,6 +10,10 @@ def display_menu():
     answer=ask_choice("START THE GAME ?", ["Start Chapter 1 – Arrival in the magical world.", "Exit the game."])
 
     return answer
+
+
+
+
 
 def launch_menu_choice():
 
@@ -32,6 +37,7 @@ def launch_menu_choice():
 
         #Chapter 4
         print()
+        houses=start_chapter_4_quidditch(character, houses)
 
 
 

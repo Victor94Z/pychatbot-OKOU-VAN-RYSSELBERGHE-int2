@@ -126,5 +126,3 @@ def start_chapter_3(character,houses):
 
     return houses
 
-
-

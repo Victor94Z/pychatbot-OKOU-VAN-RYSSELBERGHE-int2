@@ -1,11 +1,8 @@
 import random
-import time
 
-from hogwart.chapters.chapter_1 import create_character
-from hogwart.universe import character
 from hogwart.universe.house import update_house_points, display_winning_house
 from hogwart.utils.input_utils import load_file, build_file_path, slow_print
-from hogwart.universe.character import display_player, init_character
+from hogwart.universe.character import display_player
 
 TEAMS_QUIDDITCH_PATH = build_file_path("teams_quidditch.json")
 
@@ -85,13 +82,17 @@ def quidditch_match(character, houses):
     slow_print("\nQuidditch Match: Slytherin vs Hufflepuff! \n")
     player_team_name = character['House']
     opponent_team_name = random.choice([house for house in houses.keys() if house != player_team_name])
-    player_team=create_team(player_team_name,teams_quidditch,True,player)
+    player_team=create_team(player_team_name,teams_quidditch,True,character)
     opponent_team=create_team(opponent_team_name,teams_quidditch)
     display_team(player_team_name,player_team['players'])
     display_team(opponent_team_name,opponent_team['players'])
 
     slow_print(f"\nYou are playing for {player_team_name} as the Seeker \n")
-    print(input("\nPress Enter to continue..."))
+    print(input("\nPress Enter to continue...\n"))
+    slow_print('{:^130}'.format("The referee raises their wand.\n"))
+    slow_print('{:^130}'.format("With a flash of light, the Bludgers and the Quaffle are released into the air.\n"))
+    slow_print('{:^130}'.format("\nThe match begins!\n"))
+
 
     rounds=1
     golden_snitch_catch= False
@@ -102,8 +103,11 @@ def quidditch_match(character, houses):
         display_score(player_team,opponent_team)
         appears = golden_snitch_appears()
         if appears:
+            slow_print("\nA sudden glimmer catches everyone's attention…\n")
+            slow_print("The Golden Snitch has appeared!\n")
             team_who_win=catch_golden_snitch(player_team,opponent_team)
-            print(f"\nThe Golden Snitch has been caught by {team_who_win['name']}! (+150 points)")
+            team_who_win['score'] += 150
+            print(f"The Golden Snitch has been caught by {team_who_win['name']}! (+150 points)")
             golden_snitch_catch = True
 
         print(input("\nPress Enter to continue..."))
@@ -111,6 +115,10 @@ def quidditch_match(character, houses):
 
 
     slow_print("\nEnd of the match!")
+    slow_print("\nThe final whistle echoes through the stadium.")
+    slow_print("Brooms slowly descend as the crowd erupts into applause.\n")
+    print(input("Press Enter to continue..."))
+
     display_score(player_team,opponent_team)
     slow_print("\nFinal result :")
     if golden_snitch_catch :
@@ -128,6 +136,27 @@ def quidditch_match(character, houses):
     update_houses = update_house_points(update_houses, team_who_win['name'], 500)
     print()
     display_winning_house(update_houses)
+    return update_houses
+
+def start_chapter_4_quidditch(character, houses):
+    slow_print('{:^130}'.format("\nChapter 4 : Quidditch match !\n"))
+    slow_print('{:^130}'.format("The stadium roars as the two houses take their positions.\n"))
+    slow_print('{:^130}'.format("Brooms are ready, eyes are sharp, and the Golden Snitch is about to be released.\n"))
+    slow_print('{:^130}'.format("This match will decide the fate of the House Cup…\n"))
+    update_house=quidditch_match(character, houses)
+    slow_print('{:^130}'.format("\nEND OF CHAPTER 4\n"))
+    slow_print('{:^130}'.format("What an incredible performance on the field!\n"))
+    slow_print('{:^130}'.format("Courage, strategy, and determination made this match unforgettable.\n"))
+    slow_print('{:^130}'.format("The fate of the House Cup has now been decided…\n"))
+
+    print(input("Press Enter to continue...\n"))
+    slow_print("After an intense season of challenges and competition")
+    display_winning_house(update_house)
+    slow_print("Congratulations to all its members\n")
+    print(input("Press Enter to continue...\n"))
+    display_player(character)
+
+    return update_house
 
 
 
@@ -137,23 +166,6 @@ def quidditch_match(character, houses):
 
 
 
-
-
-
-player=init_character("okou","Victor",{"Courage": 0})
-player["House"]="Gryffindor"
-quidditch_match(player, {"Gryffindor": 0, "Slytherin": 0, "Hufflepuff": 0, "Ravenclaw": 0})
-'''team_1=create_team(player["House"],teams_quidditch,True,player)
-team_2=create_team("Slytherin",teams_quidditch)
-winning_team=catch_golden_snitch(team_1,team_2)
-print(winning_team)
-display_score(team_1,team_2)
-display_team(team_1['name'],team_1)
-attacking_team, defending_team = attempt_goal(team_1,team_2)
-
-display_team(team_1['name'],team_1)
-quidditch_match(player,{"houses":["Gryffindor","Slytherin","Hufflepuff","Ravenclaw"]})
-golden_snitch_appears()'''
 
 
 
