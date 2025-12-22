@@ -169,10 +169,11 @@ def sorting_ceremony(character):
             ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]
         )
     ])
-    house=character["House"]
+
     slow_print(
-        f"You join the {house} students to loud cheers!"
+        f"You join the {character["House"]} students to loud cheers!"
     )
+
 
 #Displays the player's common room introduction.
 def enter_common_room(character):

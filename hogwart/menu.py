@@ -28,7 +28,13 @@ def launch_menu_choice():
 
         #Chapter 3
         print()
-        start_chapter_3(character, houses)
+        houses=start_chapter_3(character, houses)
+
+        #Chapter 4
+        print()
+
+
+
     else:
         exit()
 

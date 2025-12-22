@@ -1,5 +1,5 @@
 import random
-import time
+
 from hogwart.universe.house import update_house_points, display_winning_house
 from hogwart.utils.input_utils import load_file, build_file_path, slow_print
 from hogwart.universe.character import display_player
@@ -123,6 +123,8 @@ def start_chapter_3(character,houses):
     slow_print("Alright, before moving on, let’s take a moment to review your character.")
     print()
     display_player(character)
+
+    return houses
 
 
 
