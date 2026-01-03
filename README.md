@@ -59,12 +59,19 @@
 # Screenshots : Screenshots demonstrating the execution of selected test cases and validations:
 # Screenshot #1: Input Validation (ERROR CASE)
 # Objective: demonstrate error handling
+<img width="667" height="302" alt="image" src="https://github.com/user-attachments/assets/9d674297-8266-47db-b5a2-7e6409587731" />
+
 
 # Screenshot #2: Input Validation (SUCCESS CASE)
 # Objective: show that valid input is accepted
+<img width="324" height="287" alt="image" src="https://github.com/user-attachments/assets/d8e08ace-b7e3-4012-a3e1-d1c703984488" />
+
 
 # Screenshot #3: Testing a Key Feature
 # Objective : Test the choice of the house
+<img width="1716" height="579" alt="image" src="https://github.com/user-attachments/assets/4130a8ed-5012-4ccc-b862-6e559ea32a8a" />
+
 
 # Screenshot #4: End of Game / Final Scenario
 # Objective: demonstrate that the game runs to completion without errors
+<img width="1531" height="519" alt="image" src="https://github.com/user-attachments/assets/223db6f8-2cd8-48e0-b152-88484bdea009" />
