@@ -2,6 +2,7 @@ from chapters.chapter_1 import start_chapter_1
 from chapters.chapter_2 import start_chapter_2
 from chapters.chapter_3 import start_chapter_3
 from chapters.chapter_4 import start_chapter_4_quidditch
+from chapters.chapter_5_extension import start_chapter_5
 from utils.input_utils import ask_choice
 
 
@@ -10,9 +11,6 @@ def display_menu():
     answer=ask_choice("START THE GAME ?", ["Start Chapter 1 – Arrival in the magical world.", "Exit the game."])
 
     return answer
-
-
-
 
 
 def launch_menu_choice():
@@ -37,9 +35,11 @@ def launch_menu_choice():
 
         #Chapter 4
         print()
-        houses=start_chapter_4_quidditch(character, houses)
+        start_chapter_4_quidditch(character, houses)
 
-
+        #Chapter 5
+        print()
+        start_chapter_5(character)
 
     else:
         exit()

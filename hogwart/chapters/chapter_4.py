@@ -1,5 +1,6 @@
 import random
 
+from chapters.chapter_1 import create_character
 from universe.house import update_house_points, display_winning_house
 from utils.input_utils import load_file, build_file_path, slow_print
 from universe.character import display_player
@@ -65,6 +66,7 @@ def catch_golden_snitch(e1,e2) :
 
     return winning_team
 
+
 def display_score(e1, e2):
     print("\nCurrent score:\n")
     print(f"→ {e1["name"]} : {e1['score']} points" )
@@ -121,17 +123,27 @@ def quidditch_match(character, houses):
 
     display_score(player_team,opponent_team)
     slow_print("\nFinal result :")
+
     if golden_snitch_catch :
         slow_print(f"The Golden Snitch was caught by {team_who_win['name']}! ")
         update_houses = update_house_points(houses, team_who_win['name'], team_who_win['score'])
         print()
 
-    if player_team["score"] > team_who_win["score"]:
+    if player_team["score"] > opponent_team["score"] or player_team["name"] == team_who_win["name"]:
         team_who_win=player_team
+        update_houses = update_house_points(update_houses, opponent_team['name'], opponent_team["score"])
+
+    elif player_team["score"] == opponent_team["score"]:
+        print("The 2 teams are tied !")
+        update_houses = update_house_points(update_houses, player_team['name'],player_team["score"])
+        update_houses = update_house_points(update_houses, opponent_team['name'],opponent_team["score"])
+        return update_houses
+
     else:
         team_who_win=opponent_team
+        update_houses = update_house_points(update_houses, player_team['name'], player_team["score"])
 
-    slow_print(f"The winning house is {team_who_win["name"]} with {team_who_win['score']} points! ")
+    slow_print(f"\nThe winning house is {team_who_win["name"]} with {team_who_win['score']} points! ")
     slow_print(f"Victory for {team_who_win['name']}! ")
     update_houses = update_house_points(update_houses, team_who_win['name'], 500)
     print()
@@ -156,11 +168,7 @@ def start_chapter_4_quidditch(character, houses):
     print(input("Press Enter to continue...\n"))
     display_player(character)
 
-    return update_house
-
-
-
-
+    return
 
 
 
