@@ -1,8 +1,8 @@
 import time
 
-from hogwart.utils.input_utils import slow_print, load_file, build_file_path, ask_choice
-from hogwart.universe.house import assign_house
-from hogwart.universe.character import display_player
+from utils.input_utils import slow_print, load_file, build_file_path, ask_choice
+from universe.house import assign_house
+from universe.character import display_player
 
 # Paths to data files
 HOUSES_DATA_PATH = build_file_path("houses.json")

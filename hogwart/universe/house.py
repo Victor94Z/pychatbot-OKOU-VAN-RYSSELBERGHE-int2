@@ -1,6 +1,4 @@
-
-
-from hogwart.utils.input_utils import ask_choice
+from utils.input_utils import ask_choice
 
 # Update the points of a given house
 def  update_house_points( houses, house_name, points):

@@ -1,8 +1,8 @@
-from hogwart.chapters.chapter_1 import start_chapter_1
-from hogwart.chapters.chapter_2 import start_chapter_2
-from hogwart.chapters.chapter_3 import start_chapter_3
-from hogwart.chapters.chapter_4 import start_chapter_4_quidditch
-from hogwart.utils.input_utils import ask_choice
+from chapters.chapter_1 import start_chapter_1
+from chapters.chapter_2 import start_chapter_2
+from chapters.chapter_3 import start_chapter_3
+from chapters.chapter_4 import start_chapter_4_quidditch
+from utils.input_utils import ask_choice
 
 
 def display_menu():

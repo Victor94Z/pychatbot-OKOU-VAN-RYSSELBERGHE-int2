@@ -1,5 +1,5 @@
 
-from hogwart.utils.input_utils import ask_choice
+from utils.input_utils import ask_choice
 
 # Create and initialize a character
 def init_character(last_name, first_name, attributes) :
