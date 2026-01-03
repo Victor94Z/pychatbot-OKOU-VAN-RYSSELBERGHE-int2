@@ -1,124 +1,174 @@
-from hogwart.utils.input_utils import slow_print,ask_choice, load_file
+import random
+import time
+import os
+from hogwart.utils.input_utils import slow_print, ask_choice, load_file
 from hogwart.chapters.chapter_1 import create_character
-import random,time, os
 from hogwart.universe.character import BASE_DIR
 
 
-SPELLS_DATA_PATH = os.path.join(BASE_DIR, "data", "houses.json")
+# =======================
+# Chargement des données
+# =======================
+
+SPELLS_DATA_PATH = os.path.join(BASE_DIR, "data", "spells.json")
 spells = load_file(SPELLS_DATA_PATH)
 
-player = create_character()
+
+# =======================
+# Fonctions utilitaires
+# =======================
+
+def get_spells_by_type(character, spell_type):
+    """Retourne les indices de sorts du personnage correspondant au type."""
+    return [
+        i for i in character["Spells"]
+        if spells[i]["type"] == spell_type
+    ]
+
+
+def choose_spell(spell_indices, prompt):
+    """Affiche les sorts et permet d'en choisir un."""
+    slow_print(prompt)
+    for idx, spell_index in enumerate(spell_indices, start=1):
+        print(f"{idx}. {spells[spell_index]['name']}")
+    choice = ask_choice("Choose a spell :", list(range(1, len(spell_indices) + 1)))
+    return spell_indices[choice - 1]
+
+
+# =======================
+# Combat
+# =======================
+
+def spider_combat(character):
+    player_health = 100
+    spider_health = 50
+    spider_damage = 8
+
+    attack_spells = get_spells_by_type(character, "Offensive")
+    defense_spells = get_spells_by_type(character, "Defensive")
+
+    if not attack_spells:
+        slow_print("You have no offensive spells... You flee in panic.")
+        return False
+
+    slow_print("Three giant spiders jump on you from the darkness!")
+
+    while player_health > 0 and spider_health > 0:
+        spider_turn = random.choice([True, False])
+        action = ask_choice('Do you want to "attack" or "defend" ?', ["attack", "defend"])
+
+        if action == "attack":
+            spell_index = choose_spell(attack_spells, "Your offensive spells:")
+            damage = random.randint(8, 15)
+            spider_health -= damage
+            slow_print(
+                f"You {spells[spell_index]['description']} "
+                f"The spider loses {damage} health."
+            )
+
+        elif action == "defend" and defense_spells:
+            spell_index = choose_spell(defense_spells, "Your defensive spells:")
+            slow_print(f"You {spells[spell_index]['description']}")
+            if spider_turn:
+                reduced = spider_damage // 2
+                player_health -= reduced
+                slow_print(f"The spider hits you, but you reduce the damage to {reduced}.")
+                spider_turn = False
+
+        if spider_turn and spider_health > 0:
+            player_health -= spider_damage
+            slow_print(f"The spider bites you! You lose {spider_damage} health.")
+
+        slow_print(f"Your health: {player_health} | Spider health: {spider_health}")
+        time.sleep(1)
+
+    if player_health > 0:
+        slow_print("You defeated the spiders and collect a spider eye.")
+        character["Inventory"].append("spider eye")
+        return True
+    else:
+        slow_print("You collapse... everything fades to black.")
+        return False
+
+
+# =======================
+# Exploration
+# =======================
+
+def explore_forest(character):
+    slow_print(
+        "The Forbidden Forest is dark and silent.\n"
+        "You feel watched."
+    )
+
+    good_path = [random.randint(1, 3) for _ in range(3)]
+    luck = 0
+
+    for step in range(3):
+        choice = ask_choice(
+            "Three paths lie ahead. Which one do you choose?",
+            [1, 2, 3]
+        )
+
+        if choice == good_path[step]:
+            slow_print("You chose the right path... for now.")
+            luck += 1
+        else:
+            survived = spider_combat(character)
+            if not survived:
+                return False
+
+    if luck == 3:
+        slow_print(
+            "You discover a peaceful lake.\n"
+            "A strange wand floats on the surface."
+        )
+        pickup = ask_choice("Do you pick it up?", ["yes", "no"])
+        if pickup == "yes":
+            slow_print("You obtained the Supreme Sorcerer Wand.")
+            character["Inventory"].append("supreme sorcerer wand")
+
+    return True
+
+
+# =======================
+# Scène principale
+# =======================
 
 def spider_fight(character):
-    slow_print('{:^130}'.format("As you're walking through the corridor in Poudlard you see a dark smoke coming out of a forest.\n" 
-    "Looking closely the whole forest is suspicious emaning an odd energy."))
-    approach = ask_choice("Are you interested in going in the forest ?",["yes","no"])
-    if approach == "yes":
-        print('{:^130}'.format("Your are approaching the forest when a sign on the side trigger your attention.\n" 
-        " ________________________________________________________  \n", 
-        "|                                                        | \n", 
-        "|         ___                  ___    ___  __            | \n", 
-        "|        |   \    /\    |\  | /   \  |    |__\           | \n",
-        "|        |    |  /__\   | \ ||  ____ |--- | \            | \n",  
-        "|        |___/  /    \  |  \| \___/  |___ |  \           | \n", 
-        "|                                                        | \n",
-        "|                                                        | \n", 
-        "|________________________________________________________| \n",
-        "                       |    |                              \n", 
-        "                       |    |                              \n",
-        "                       |    |                                " ))
-        enter = ask_choice("This is the forbidden forest entrance, are your sure you want to continue your way through ? :",['yes','no'])
-        if enter == "yes":
-            slow_print('{:^130}'.format("The player enter the Forbidden forest \n" 
-            "You have the strange impression that something is observing you...\n" 
-            "As you look left and right little red dots in the forest disappear cracking the dry leaves"))
-            good_path = [random.randint(1,3),random.randint(1,3),random.randint(1,3)]
-            luck = 0
-            spider_health = 17
-            for i in range(3):
-                char_path = ask_choice('{:^130}'.format("Three paths are in front of you, which one are choosing ? : ",[1,2,3]))
-                if char_path == good_path[i]:
-                    spider_health *= 2,5
-                    spider_damage = 6
-                    slow_print('{:^130}'.format("The grass become taller and the light is struggling to pass through the trees.\n" \
-                    "More eyes are looking at you from the dark but you are safe. \n" 
-                    "for now... \n",time.sleep(2)))
-                    luck += 1
-                else :
-                    slow_print('{:^130}'.format("You take a branch to go on your way. \n" 
-                    "The atmosphere is becoming more and more stressful. You continue straight and... \n" 
-                    "CRACK ! \n" 
-                    "three spider jumps on you from the dark !")) 
-                    player_health = 100
+    slow_print(
+        "As you walk through the corridors of Hogwarts,\n"
+        "dark smoke rises from the Forbidden Forest."
+    )
 
-                    attack_spells = []
-                    for i in character["Spells"]:
-                                if spells[i]["type"] == "Offensive":
-                                    attack_spells.append(i)
+    approach = ask_choice(
+        "Are you interested in going into the forest?",
+        ["yes", "no"]
+    )
 
-                    defense_spells = []
-                    for i in character["Spells"]:
-                                if spells[i]["type"] == "Offensive":
-                                    defense_spells.append(i)
-                    fight = True
-                    while fight:
-                        spider_turn = random.choice(True,False)
-                        print(spider_turn)
-                        action = ask_choice('Do you "attack" or "defend" : ',['attack','defend'])
-                        if action == 'attack':
-                            possible_spells = []
-                            slow_print("Your attack spells are : ")
-                            for j in range(len(attack_spells)):
-                                possible_spells.append(j)
-                                print(j + 1 ,attack_spells[j])
-                            spells_used = ask_choice("What spell are you attacking the spider with ? : ",possible_spells)
-                            spider_health -= spells[attack_spells[spells_used]]["damage"]//3
-                            if spider_health > 0 :
-                                slow_print(f"You {spells[attack_spells[spells_used]]["description"]}, the spider still have {spider_health} health")
-                            else :
-                                slow_print(f"You {spells[attack_spells[spells_used]]["description"]}, You killed the spiders \n"
-                                                "you retrieved an eye from the spiders")
-                                character["Inventory"].append("spider eye")
-                                fight = False
-                            if spider_turn:
-                                slow_print("Ths spiders jumps on you biting everything they can")
-                                player_health -= spider_damage
-                                if player_health > 0:
-                                    slow_print(f"You lost {spider_damage} health, you still have {player_health} health remaining.")
-                                if player_health < 0:
-                                      slow_print(f"You lost {spider_damage},you died...")
-                                      fight = False
-                        if action == "defense":
-                            possible_spells = []
-                            slow_print("Your defense spells are : ")
-                            for j in range(len(defense_spells)):
-                                possible_spells.append(j)
-                                print(j + 1, defense_spells[j])
-                            spells_used = ask_choice("What spell are you attacking the spider with ? : ",possible_spells)
-                            if spider_turn:
-                                slow_print(f"You {spells[attack_spells[spells_used]]["description"]}")
-                            else:
-                                slow_print("You blocked nothing, the spiders wait for you to end the spells and attacks you")
-                                player_health -= spider_damage * 1.5
-                                if player_health > 0:
-                                    slow_print(f"You lost {spider_damage} health, you still have {player_health} health remaining.")
-                                if player_health < 0:
-                                    slow_print(f"You lost {spider_damage},you died...")
-                                    fight = False
-            if player_health > 0:
-                if luck == 3:
-                    slow_print(f"You find a peacefull lake that seems alone in its own world. You feel a warm and reassuring sun ray \n"
-                                "a strange wood stick is floating upon the lake.")
-                    pickup = ask_choice("Do you want to pick it up",["yes","no"])
-                    if pickup == "yes":
-                        slow_print("You pick up the supreme sorcerer wand")
-                        character["Invetory"].append("supreme sorcerer wand")
-            else:
-                slow_print("You wake up in Hagrid's house. You can see the forbidden forest through the glass")
-        else :
-            slow_print('{:^130}'.format("petite sasa"))
-    else :
-        slow_print('{:^130}'.format("bahah t'es une petite sasa"))
+    if approach == "no":
+        slow_print("You decide not to take the risk.")
+        return
 
-        
+    enter = ask_choice(
+        "This is the Forbidden Forest. Are you sure?",
+        ["yes", "no"]
+    )
+
+    if enter == "yes":
+        survived = explore_forest(character)
+        if not survived:
+            slow_print(
+                "You wake up in Hagrid's hut.\n"
+                "The forest looms outside the window."
+            )
+    else:
+        slow_print("You turn back, your instincts screaming at you.")
+
+
+# =======================
+# Lancement
+# =======================
+
+player = create_character()
 spider_fight(player)
