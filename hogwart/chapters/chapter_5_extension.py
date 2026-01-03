@@ -190,6 +190,7 @@ def start_chapter_5(character):
             exit()
     else:
         slow_print("You turn back, your instincts screaming at you.")
+        print()
         print(('{:^130}'.format("GAME OVER")))
         exit()
 
