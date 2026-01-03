@@ -1,8 +1,8 @@
 import random
 
-from hogwart.universe.house import update_house_points, display_winning_house
-from hogwart.utils.input_utils import load_file, build_file_path, slow_print
-from hogwart.universe.character import display_player
+from universe.house import update_house_points, display_winning_house
+from utils.input_utils import load_file, build_file_path, slow_print
+from universe.character import display_player
 
 
 # Path to spells data file

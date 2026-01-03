@@ -1,4 +1,4 @@
-from hogwart.menu import launch_menu_choice
+from menu import launch_menu_choice
 
 # Launches the main menu loop.
 if __name__ == "__main__":

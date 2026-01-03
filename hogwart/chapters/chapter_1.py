@@ -1,8 +1,8 @@
 import time
 
 
-from hogwart.utils.input_utils import ask_text, ask_number, ask_choice, load_file, build_file_path,slow_print
-from hogwart.universe.character import init_character, display_player,modify_money
+from utils.input_utils import ask_text, ask_number, ask_choice, load_file, build_file_path,slow_print
+from universe.character import init_character, display_player,modify_money
 
 
 # Paths to data files
